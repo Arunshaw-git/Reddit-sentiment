@@ -1,0 +1,26 @@
+{
+  "name": "backend",
+  "version": "1.0.0",
+  "description": "website that lists stock's sentiment dicussed in reddit communities after scraping data from and evaluating the sentiment by using AI ",
+  "homepage": "https://github.com/Arunshaw-git/Reddit-sentiment#readme",
+  "bugs": {
+    "url": "https://github.com/Arunshaw-git/Reddit-sentiment/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Arunshaw-git/Reddit-sentiment.git"
+  },
+  "license": "ISC",
+  "author": "",
+  "type": "commonjs",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^17.2.3",
+    "express": "^5.2.1",
+    "mongoose": "^9.1.3"
+  }
+}
