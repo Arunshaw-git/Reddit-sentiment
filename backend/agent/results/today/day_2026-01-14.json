@@ -1,0 +1,202 @@
+[
+  {
+    "ticker": "DJIA",
+    "sentiment": "negative",
+    "reasoning": "Futures for the Dow Jones Industrial Average dipped due to the criminal investigation of Federal Reserve Chairman Jerome Powell, creating market uncertainty."
+  },
+  {
+    "ticker": "SPX",
+    "sentiment": "negative",
+    "reasoning": "Futures for the S&P 500 shed points due to the criminal investigation of Federal Reserve Chairman Jerome Powell, leading to investors taking off some risk."
+  },
+  {
+    "ticker": "NDX",
+    "sentiment": "negative",
+    "reasoning": "Futures for the Nasdaq-100 lost points due to the criminal investigation of Federal Reserve Chairman Jerome Powell, increasing market uncertainty."
+  },
+  {
+    "ticker": "GD",
+    "sentiment": "negative",
+    "reasoning": "Shares of General Dynamics fell following President Trump's threats to ban defense companies from issuing dividends or stock buybacks."
+  },
+  {
+    "ticker": "LMT",
+    "sentiment": "negative",
+    "reasoning": "Shares of Lockheed Martin fell following President Trump's threats to ban defense companies from issuing dividends or stock buybacks."
+  },
+  {
+    "ticker": "NOC",
+    "sentiment": "negative",
+    "reasoning": "Shares of Northrop Grumman fell following President Trump's threats to ban defense companies from issuing dividends or stock buybacks."
+  },
+  {
+    "ticker": "RTX",
+    "sentiment": "negative",
+    "reasoning": "President Trump singled out Raytheon with threats to cut off Pentagon purchases if the company did not end stock buybacks and increase production investment."
+  },
+  {
+    "ticker": "GOOGL",
+    "sentiment": "positive",
+    "reasoning": "Alphabet (Google) climbed to a new all-time high, surpassing Apple's market capitalization, achieved a $4 trillion market cap, and secured a multi-year AI partnership with Apple, signaling strong growth and market position."
+  },
+  {
+    "ticker": "AAPL",
+    "sentiment": "positive",
+    "reasoning": "Apple formed a multi-year partnership with Google to power its AI features like Siri, which is expected to enhance its product offerings. Additionally, the Apple Card program transitioned to JPMorgan Chase, a stronger issuer, ensuring stability."
+  },
+  {
+    "ticker": "AMD",
+    "sentiment": "positive",
+    "reasoning": "Mentioned by an investor as a top performer in their portfolio."
+  },
+  {
+    "ticker": "RKLB",
+    "sentiment": "positive",
+    "reasoning": "Identified as one of Reddit's top favorite stocks for 2026 and noted for providing 'solid gains' to investors."
+  },
+  {
+    "ticker": "ASTS",
+    "sentiment": "positive",
+    "reasoning": "Identified as one of Reddit's top favorite stocks for 2026 and noted for providing 'solid gains' to investors."
+  },
+  {
+    "ticker": "AMZN",
+    "sentiment": "positive",
+    "reasoning": "Identified as one of Reddit's top favorite stocks for 2026, with impressive AWS margins and a growing advertising business, making it a strong long-term growth play."
+  },
+  {
+    "ticker": "NBIS",
+    "sentiment": "positive",
+    "reasoning": "Identified as one of Reddit's top favorite stocks for 2026 and received multiple strong buy recommendations from investors."
+  },
+  {
+    "ticker": "RDDT",
+    "sentiment": "positive",
+    "reasoning": "Identified as one of Reddit's top favorite stocks for 2026."
+  },
+  {
+    "ticker": "MU",
+    "sentiment": "positive",
+    "reasoning": "Identified as one of Reddit's top favorite stocks for 2026 and received a buy recommendation from investors."
+  },
+  {
+    "ticker": "SOFI",
+    "sentiment": "positive",
+    "reasoning": "Identified as one of Reddit's top favorite stocks for 2026."
+  },
+  {
+    "ticker": "POET",
+    "sentiment": "positive",
+    "reasoning": "Identified as one of Reddit's top favorite stocks for 2026."
+  },
+  {
+    "ticker": "IREN",
+    "sentiment": "positive",
+    "reasoning": "Identified as one of Reddit's top favorite stocks for 2026."
+  },
+  {
+    "ticker": "HOOD",
+    "sentiment": "positive",
+    "reasoning": "Identified as one of Reddit's top favorite stocks for 2026."
+  },
+  {
+    "ticker": "RIVN",
+    "sentiment": "positive",
+    "reasoning": "Identified as one of Reddit's top favorite stocks for 2026."
+  },
+  {
+    "ticker": "NVDA",
+    "sentiment": "negative",
+    "reasoning": "Despite an impressive AI-powered Drive platform and automaker partnerships, market sentiment reflects cynicism and fatigue regarding 'founder worship' and concerns about AI hype creating a bubble reminiscent of the dot-com era."
+  },
+  {
+    "ticker": "ONDS",
+    "sentiment": "positive",
+    "reasoning": "Identified as one of Reddit's top favorite stocks for 2026 and mentioned as a high-conviction bullish position by an investor."
+  },
+  {
+    "ticker": "META",
+    "sentiment": "positive",
+    "reasoning": "Appointed Dina Powell McCormick as president and vice chairman, with a mandate to accelerate its AI push and guide overall strategy, signaling strong leadership and strategic direction."
+  },
+  {
+    "ticker": "ASX",
+    "sentiment": "positive",
+    "reasoning": "As a market leader in outsourced semiconductor packaging and testing, the company is well-diversified, investing heavily in new equipment, and positioned to grow with the trend in advanced packaging."
+  },
+  {
+    "ticker": "FSLR",
+    "sentiment": "positive",
+    "reasoning": "First Solar boasts strong financials with zero debt, high profit margins, a substantial backlog, and new factories coming online, positioning it as a leader in cost-effective, grid-scale solar technology."
+  },
+  {
+    "ticker": "CLS",
+    "sentiment": "positive",
+    "reasoning": "Celestica is an advanced electronics manufacturer and market leader in high-speed network switches for hyperscaler datacenters, with diversified business segments and strong growth expectations (28% EPS growth annually for five years)."
+  },
+  {
+    "ticker": "APLD",
+    "sentiment": "positive",
+    "reasoning": "Received a buy recommendation from an investor in the comments."
+  },
+  {
+    "ticker": "SLS",
+    "sentiment": "positive",
+    "reasoning": "Received a buy recommendation from an investor in the comments."
+  },
+  {
+    "ticker": "KRKNF",
+    "sentiment": "positive",
+    "reasoning": "Mentioned as a high-conviction bullish position by an investor for future growth."
+  },
+  {
+    "ticker": "QXO",
+    "sentiment": "positive",
+    "reasoning": "Mentioned as a high-conviction bullish position by an investor for future growth."
+  },
+  {
+    "ticker": "JPM",
+    "sentiment": "positive",
+    "reasoning": "JPMorgan Chase acquired the Apple Card program, strengthening its already dominant credit card business and indicating strategic expansion."
+  },
+  {
+    "ticker": "GS",
+    "sentiment": "negative",
+    "reasoning": "Goldman Sachs sold its Apple Card balances at a discount of over $1 billion, reflecting significant losses and challenges in its mass consumer lending efforts, leading to its retreat from the sector."
+  },
+  {
+    "ticker": "GME",
+    "sentiment": "neutral",
+    "reasoning": "GameStop's new CEO compensation plan, tied to an extremely aggressive $100 billion market capitalization target, creates mixed sentiment regarding its feasibility and long-term value creation without a major business transformation."
+  },
+  {
+    "ticker": "TSLA",
+    "sentiment": "negative",
+    "reasoning": "Tesla's Full Self-Driving (FSD) approach is viewed negatively compared to NVIDIA's platform, and there's skepticism about its leadership in robotics and ability to compete in new markets."
+  },
+  {
+    "ticker": "FNMA",
+    "sentiment": "neutral",
+    "reasoning": "Fannie Mae is mentioned in the context of President Trump's controversial proposal to buy mortgage bonds to drive down rates, a move met with skepticism regarding its authority and market impact."
+  },
+  {
+    "ticker": "FMCC",
+    "sentiment": "neutral",
+    "reasoning": "Freddie Mac is mentioned in the context of President Trump's controversial proposal to buy mortgage bonds to drive down rates, a move met with skepticism regarding its authority and market impact."
+  },
+  {
+    "ticker": "AXP",
+    "sentiment": "positive",
+    "reasoning": "Mentioned by a commenter as a stock expected to recover quickly after market dips, indicating resilience to political noise."
+  },
+  {
+    "ticker": "V",
+    "sentiment": "positive",
+    "reasoning": "Mentioned by a commenter as a stock expected to recover quickly after market dips, indicating resilience to political noise."
+  },
+  {
+    "ticker": "MA",
+    "sentiment": "positive",
+    "reasoning": "Mentioned by a commenter as a stock expected to recover quickly after market dips, indicating resilience to political noise."
+  }
+]
