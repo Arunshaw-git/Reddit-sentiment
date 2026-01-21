@@ -98,7 +98,6 @@ def cleanResutIntoJson(result):
 
 #     return list(merged.values())
 
-
 def saveDataInJson(text,timeRange):
     timestamp = datetime.date.today().isoformat()
     base_dir = os.getcwd()
