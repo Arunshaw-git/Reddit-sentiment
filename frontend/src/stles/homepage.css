@@ -3,31 +3,61 @@
   --secondary-color: #191a23;
   --body-color: #f3f3f3;
 }
-.main {
-  background-image: linear-gradient(to bottom right, #4ac7b7, #fed9b7);
+html,
+body {
+  min-height: 100%;
 }
 
+body {
+  margin: 0;
+  background: linear-gradient(
+    135deg,
+      #020617,
+    #0f172a,
+    #1e293b
+  );
+  background-attachment: fixed;
+  
+}
+
+.main{
+  color:white;
+}
 .logo {
   font-size: 40px;
   font-family: Georgia, "Times New Roman", Times, serif;
   display: inline-block; /* REQUIRED */
   transform: scaleY(1.8);
+  letter-spacing: 2px;
 }
 .result-item {
   width: 260px;
-  height: 200px;
-  background: rgba(255, 255, 255, 0.15);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
+  height: 150px;
+
+  background: transparent;
+
+  backdrop-filter: blur(1px) saturate(160%);
+  -webkit-backdrop-filter: blur(10px) saturate(160%);
+
   border-radius: 20px;
-  border: 1px solid rgba(255, 255, 255, 0.3);
-  box-shadow:
-    0 8px 32px rgba(0, 0, 0, 0.1),
-    inset 0 1px 0 rgba(255, 255, 255, 0.5),
-    inset 0 -1px 0 rgba(255, 255, 255, 0.1),
-    inset 0 0 20px 10px rgba(255, 255, 255, 1);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.35);
+
   position: relative;
+  margin-bottom: 6px;
   overflow: hidden;
+
+  transition:
+    height 0.4s ease,
+    font 0.4s ease,
+    transform 0.3s ease;
+  cursor: pointer;
+}
+.result-item.expanded {
+  height: 360px;
+  font-size: x-large;
+  transform: scale(1.03);
 }
 
 .result-item::before {
@@ -35,14 +65,17 @@
   position: absolute;
   top: 0;
   left: 0;
-  right: 0;
-  height: 1px;
+  width: 100%;
+  height: 100%;
+
   background: linear-gradient(
-    90deg,
-    transparent,
-    rgba(255, 255, 255, 0.8),
+    120deg,
+    rgba(255, 255, 255, 0.25),
+    rgba(255, 255, 255, 0.05),
     transparent
   );
+
+  pointer-events: none;
 }
 
 .result-item::after {
@@ -50,12 +83,28 @@
   position: absolute;
   top: 0;
   left: 0;
-  width: 1px;
-  height: 100%;
+  height: 1px;
+  width: 100%;
+
   background: linear-gradient(
-    180deg,
-    rgba(255, 255, 255, 0.8),
+    90deg,
     transparent,
-    rgba(255, 255, 255, 0.3)
+    rgba(255, 255, 255, 0.6),
+    transparent
   );
+}
+.list {
+  display: flex;
+  align-items: flex-start; /* or center */
+  gap: 16px;
+}
+.sentiment.negative{
+  color:rgb(255, 0, 0)
+
+}
+.sentiment.positive{
+  color:#00ff4c
+}
+.sentiment.neutral{
+  color:#ecf1f1
 }

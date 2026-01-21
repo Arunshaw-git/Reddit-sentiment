@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import fs from "fs";
 import path from "path";
 import "./stles/homepage.css";
+import SentimentCard from "./SentimentCard";
 // import SentimentCard from "./SentimentCard";
 
 const homepage = () => {
@@ -37,27 +38,13 @@ const homepage = () => {
   return (
     <div className="container my-2 ">
       <h1 className="logo  ">REDDIT BASED SENTIMENT</h1>
-      <p className="text-muted text-center">
+      <p className="text-muted text-center" >
         Aggregated stock & sector sentiment extracted from Reddit discussions
       </p>
       <div className="row">
         {results.map((el, i) => {
           return (
-            <li className="result-item">
-              <div className="list">
-                <div className="left">
-                  <h1 className="index">{i}</h1>
-                </div>
-
-                <div className="content">
-                  <h2 className="assetName">{el.ticker}</h2>
-                  <span className={`sentiment ${el.sentiment}`}>
-                    {el.sentiment}
-                  </span>
-                  <p className="reasoning">{el.reasoning}</p>
-                </div>
-              </div>
-            </li>
+            <SentimentCard key={i} i={i} el={el}></SentimentCard>
           );
         })}
       </div>
