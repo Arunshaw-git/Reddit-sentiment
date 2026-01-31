@@ -4,21 +4,21 @@ import path from "path";
 import { fileURLToPath } from "url";
 import { dirname } from "path";
 import cors from "cors";
-import { exec } from "child_process";
 import { spawn } from "child_process";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
 const app = express();
-const pythonPath = path.join(
-  process.cwd(),
+// const pythonPath = path.join(
+//   process.cwd(),
 
-  "agent",
-  ".venv",
-  "Scripts",
-  "python.exe",
-);
+//   "agent",
+//   ".venv",
+//   "Scripts",
+//   "python.exe",
+// );
+const pythonPath =process.env.PYTHON || "python3";
 
 const scriptPath = path.join(process.cwd(), "agent", "scrapingAndSentiment.py");
 
