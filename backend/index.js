@@ -24,7 +24,7 @@ const scriptPath = path.join(process.cwd(), "agent", "scrapingAndSentiment.py");
 
 app.use(
   cors({
-    origin: "http://localhost:5173",
+    origin: ["http://localhost:5173","https://redditstocks.netlify.app"],
     methods: ["GET", "POST", "PUT", "DELETE"],
   }),
 );
