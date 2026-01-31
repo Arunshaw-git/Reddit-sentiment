@@ -1,0 +1,217 @@
+[
+  {
+    "asset": "Silver",
+    "sentiment": "mixed",
+    "reasoning": "Short-term negative due to significant crashes (35%, 33%+, hits LC on MCX), being a manipulated metal, leveraged ETFs being wiped out, extreme selling pressure, banks shorting, warnings against 'dead cat bounces', CME margins raised, and potential reduced import duties. Long-term positive due to underlying demand drivers (AI race, limited production), portfolio protection, and potential for dollar depreciation."
+  },
+  {
+    "asset": "Gold",
+    "sentiment": "mixed",
+    "reasoning": "Short-term negative due to sharp falls (12%, 11%+), getting crushed, margin calls, market manipulation, speculation of reduced import duties, and Russia liquidating. Long-term positive based on its role as a safe haven, portfolio protection, underlying demand drivers (AI race), and potential for dollar depreciation."
+  },
+  {
+    "asset": "Silverbees",
+    "sentiment": "negative",
+    "reasoning": "A leveraged ETF that was wiped out, with expectations of crashing more than 50% due to fake premium, leading to investor regret and potential loss of entire portfolios."
+  },
+  {
+    "asset": "Hindustan Copper",
+    "sentiment": "negative",
+    "reasoning": "Investor lost money after buying shares, expressing regret ('L lag gaye mere')."
+  },
+  {
+    "asset": "Copper",
+    "sentiment": "negative",
+    "reasoning": "Futures contracts are down significantly, and CME raised margins, which often leads to short-term liquidation."
+  },
+  {
+    "asset": "ETFs",
+    "sentiment": "negative",
+    "reasoning": "Expected 'bloodbath' for ETFs (implied metals ETFs), and risks such as management failing to hold underlying metal, trading at a significant premium to NAV, and amplified corrections."
+  },
+  {
+    "asset": "Equities",
+    "sentiment": "mixed",
+    "reasoning": "Negative for Indian equities due to FPI/FII pulling money out, Japan issue, LTCG, and falling INR. Positive for general US/American companies, with markets potentially shifting money into equities, and advice to buy great American companies at good prices."
+  },
+  {
+    "asset": "Tech sector",
+    "sentiment": "positive",
+    "reasoning": "Wall Street is bullish on tech, with some believing markets are shifting funds into the sector."
+  },
+  {
+    "asset": "Microsoft",
+    "sentiment": "positive",
+    "reasoning": "Reported great earnings, seen as a good buy and 'on sale' despite a negative market reaction, with potential for easy scalps."
+  },
+  {
+    "asset": "OpenAI",
+    "sentiment": "mixed",
+    "reasoning": "Positive for laying groundwork for an IPO, accelerating fundraising, and attracting large investments; negative for bleeding money, not being profitable for years, and being considered a 'pariah.'"
+  },
+  {
+    "asset": "Anthropic",
+    "sentiment": "mixed",
+    "reasoning": "Positive for fundraising and hoping for a public offering; negative for bleeding money and not being profitable until 2028."
+  },
+  {
+    "asset": "SpaceX",
+    "sentiment": "positive",
+    "reasoning": "Reportedly aiming to go public soon, considered a huge opportunity for pre-IPO exposure."
+  },
+  {
+    "asset": "IPO market",
+    "sentiment": "positive",
+    "reasoning": "2026 is expected to be a 'huge year for IPOs.'"
+  },
+  {
+    "asset": "Federal contractors",
+    "sentiment": "negative",
+    "reasoning": "US government shutdown uncertainty can weigh on performance."
+  },
+  {
+    "asset": "Government-dependent sectors",
+    "sentiment": "negative",
+    "reasoning": "US government shutdown uncertainty can weigh on performance."
+  },
+  {
+    "asset": "Dollar",
+    "sentiment": "positive",
+    "reasoning": "Up 0.28%, strengthening due to rumors of a hawkish Fed chair."
+  },
+  {
+    "asset": "Crypto",
+    "sentiment": "negative",
+    "reasoning": "Speculative money is getting out, experiencing a slow, long decline, usefulness is unproven, vulnerable to manipulation ('rug pull'), and institutions are de-risking by selling."
+  },
+  {
+    "asset": "America (economy)",
+    "sentiment": "negative",
+    "reasoning": "Described as a 'sinking ship' with predictions of falling rates, rising inflation, and investors fleeing."
+  },
+  {
+    "asset": "Small cap tech companies",
+    "sentiment": "negative",
+    "reasoning": "An investor lost 15% on a small cap tech stock due to missing critical lawsuit news, questioning the viability of individual stock picking."
+  },
+  {
+    "asset": "Tesla",
+    "sentiment": "negative",
+    "reasoning": "Investor lost faith in the CEO, identified financial red flags, data/models not supporting the original thesis, original business plan (20M cars by 2030) unfeasible, and deemed too big to be a 'tenbagger.'"
+  },
+  {
+    "asset": "Unity",
+    "sentiment": "negative",
+    "reasoning": "Stock dropped over 20-30% and was 'getting smoked' following news about Google Deepmind's Project Genie."
+  },
+  {
+    "asset": "Take Two Interactive",
+    "sentiment": "negative",
+    "reasoning": "Stock dropped 10% and was 'getting smoked' following news about Google Deepmind's Project Genie."
+  },
+  {
+    "asset": "Roblox",
+    "sentiment": "negative",
+    "reasoning": "Stock dropped 10% and was 'getting smoked' following news about Google Deepmind's Project Genie."
+  },
+  {
+    "asset": "SoFi",
+    "sentiment": "positive",
+    "reasoning": "Reported a record-breaking 'first-billion dollar quarter' with exceptional results, strong revenue, EBITDA, member, and product growth, and strong 2026 guidance and medium-term outlook. Despite a sharp post-earnings sell-off, it's considered a 'buy on dips' with 'top 10 bank' potential, expecting it to 'rip' higher after market manipulation."
+  },
+  {
+    "asset": "Samsung Electronics",
+    "sentiment": "positive",
+    "reasoning": "Reported an over threefold surge in Q4 profits, hitting a new record and beating estimates due to memory chip shortage and strong AI server demand, particularly HBM/DRAM. Its mobile experience division, however, saw a fall in operating profit due to competition."
+  },
+  {
+    "asset": "SK Hynix",
+    "sentiment": "positive",
+    "reasoning": "Posted a record operating profit, surpassing Samsung, and is the global leader in high-bandwidth memory (HBM), which is crucial for AI processors."
+  },
+  {
+    "asset": "EWY",
+    "sentiment": "positive",
+    "reasoning": "Described as a 'great hold' due to significant exposure to strong companies like Samsung, SK Hynix, and Hyundai."
+  },
+  {
+    "asset": "Veeva Systems",
+    "sentiment": "positive",
+    "reasoning": "Believed to be 'unduly punished,' possesses massive margins, steady growth, heavy switching costs, and stands to gain significantly from AI."
+  },
+  {
+    "asset": "ServiceNow",
+    "sentiment": "mixed",
+    "reasoning": "One view is positive, seeing it as 'unduly punished' with strong fundamentals and AI upside; another view is negative, due to 'multiple compression repricing,' being considered too expensive, and potentially no longer a dominant powerhouse due to new AI competition like Anthropic's co-work bot."
+  },
+  {
+    "asset": "Salesforce",
+    "sentiment": "negative",
+    "reasoning": "Believed to be no longer a dominant powerhouse due to new AI competition like Anthropic's co-work bot."
+  },
+  {
+    "asset": "The Trade Desk",
+    "sentiment": "negative",
+    "reasoning": "Stock dropped 20% due to perceived CEO incompetence, three CFOs stepping down, lack of clear communication, and the CEO selling shares while the company took an 80% haircut."
+  },
+  {
+    "asset": "Oracle",
+    "sentiment": "neutral",
+    "reasoning": "Despite landing big contracts and potential funding, the stock continues to drop due to market doubt, high debt, and existing negative sentiment; its future hinges on RPO conversion and AI adoption rate."
+  },
+  {
+    "asset": "Adani Green Energy",
+    "sentiment": "mixed",
+    "reasoning": "Initially seen as a mistake with shares at an all-time low, but also has potential for appreciation, heavy investment in green energy, and a history of cyclical increases, though tempered by political influence."
+  },
+  {
+    "asset": "Bharat 22",
+    "sentiment": "positive",
+    "reasoning": "Expected to go up."
+  },
+  {
+    "asset": "CPSE",
+    "sentiment": "positive",
+    "reasoning": "Expected to go up."
+  },
+  {
+    "asset": "US Treasuries",
+    "sentiment": "negative",
+    "reasoning": "Potential for Japan to sell some, sending a message."
+  },
+  {
+    "asset": "Weed stocks",
+    "sentiment": "negative",
+    "reasoning": "Did not turn out well historically."
+  },
+  {
+    "asset": "Solar stocks",
+    "sentiment": "negative",
+    "reasoning": "Did not turn out well historically."
+  },
+  {
+    "asset": "Axon Enterprise",
+    "sentiment": "mixed",
+    "reasoning": "Positive outlook stems from a potential turning point with a push for body cams reversing its 'downward spiral'; negative views cite a 'megalantic dog doo' chart and pure gambling."
+  },
+  {
+    "asset": "Joby Aviation",
+    "sentiment": "neutral",
+    "reasoning": "An investor re-entered a 'tiny' position, suggesting cautious re-evaluation after previously advising against drone stocks."
+  },
+  {
+    "asset": "DXYZ",
+    "sentiment": "mixed",
+    "reasoning": "Positive view highlights it as a 'huge opportunity' with pre-IPO exposure to companies like SpaceX; negative views cite an 'extreme premium to NAV' and 'lackluster results' from similar ETFs."
+  },
+  {
+    "asset": "USAS",
+    "sentiment": "neutral",
+    "reasoning": "Investor plans on holding long-term, expecting the stock to move with gold and silver prices."
+  },
+  {
+    "asset": "SLV",
+    "sentiment": "neutral",
+    "reasoning": "Investor used it as a primary holding for silver, implying belief in silver's price movement, and plans to hold."
+  }
+]

@@ -1,12 +1,22 @@
 import requests 
 import json 
+import sys
+import time
+print("PYTHON AGENT STARTED")
+sys.stdout.flush()
+sys.stdout.reconfigure(encoding="utf-8")
+sys.stderr.reconfigure(encoding="utf-8")
 import os
 from dotenv import load_dotenv
 import datetime
-load_dotenv()
+from pathlib import Path
+env_path = Path(__file__).resolve().parents[1] / ".env"
+print("Loaded env from:", env_path)
+load_dotenv(env_path)
 # from openai import OpenAI
 from google import genai
 import re
+
 HEADERS = {
     "User-Agent": "reddit-stock-sentiment/0.1 by Arun"
 }
@@ -97,6 +107,25 @@ def cleanResutIntoJson(result):
 #                 merged[ticker]["sentiment"] = "neutral"
 
 #     return list(merged.values())
+import os
+import shutil
+
+def clear_folder(folder_path):
+    if not os.path.exists(folder_path):
+        print("Folder does not exist:", folder_path)
+        return
+
+    for item in os.listdir(folder_path):
+        item_path = os.path.join(folder_path, item)
+
+        try:
+            if os.path.isfile(item_path) or os.path.islink(item_path):
+                os.remove(item_path)          # delete file
+            elif os.path.isdir(item_path):
+                shutil.rmtree(item_path)      # delete subfolder
+        except Exception as e:
+            print(f"Failed to delete {item_path}: {e}")
+
 
 def saveDataInJson(text,timeRange):
     timestamp = datetime.date.today().isoformat()
@@ -104,7 +133,7 @@ def saveDataInJson(text,timeRange):
 
     path = os.path.join(base_dir, "results", timeRange)
     os.makedirs(path, exist_ok=True)
-
+    clear_folder(path)
     file_path = os.path.join(path, f"{timeRange}_{timestamp}.json")
 
     print(f"\nSpecific file path: {file_path}")
@@ -159,8 +188,13 @@ def cleaningThePosts(wholePostsJson):
 #   base_url="https://openrouter.ai/api/v1",
 #   api_key=os.getenv("OPENROUTER_API_KEY"),
 # )
+api_key = os.getenv("GEMINI_API_KEY")
+
+if not api_key:
+    raise RuntimeError("GEMINI_API_KEY not loaded. Check .env path.")
 
 client = genai.Client(api_key=os.getenv("GEMINI_API_KEY"))
+print("GEMINI_API_KEY:", os.getenv("GEMINI_API_KEY"))
 
 for timeRange in timeRanges:
     cleanedposts = []
@@ -192,4 +226,5 @@ for timeRange in timeRanges:
         parsed,
         timeRange
     ))
+    time.sleep(2)
     

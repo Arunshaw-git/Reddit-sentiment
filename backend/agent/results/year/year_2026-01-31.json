@@ -1,0 +1,17 @@
+[
+  {
+    "asset": "TSLA",
+    "sentiment": "positive",
+    "reasoning": "Strong EV sales and upcoming battery day."
+  },
+  {
+    "asset": "XOM",
+    "sentiment": "negative",
+    "reasoning": "Oil prices are expected to drop next quarter."
+  },
+  {
+    "asset": "AMD",
+    "sentiment": "neutral",
+    "reasoning": "No strong view at the moment."
+  }
+]

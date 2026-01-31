@@ -23,12 +23,14 @@ body {
 .main{
   color:white;
 }
+
 .logo {
   font-size: 40px;
   font-family: Georgia, "Times New Roman", Times, serif;
   display: inline-block; /* REQUIRED */
   transform: scaleY(1.8);
   letter-spacing: 2px;
+
 }
 .result-item {
   width: 260px;
