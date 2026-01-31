@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
 import "./stles/homepage.css";
 import SentimentCard from "./SentimentCard";
-import 'dotenv/config'; 
 
-const API_URL = process.env.API_URL;
+const API_URL = import.meta.env.VITE_API_URL;
+console.log("API URL:", API_URL);
 
 const homepage = () => {
   const [results, setResults] = useState([]);
