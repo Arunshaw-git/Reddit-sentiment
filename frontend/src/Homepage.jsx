@@ -23,10 +23,15 @@ const homepage = () => {
 
   useEffect(() => {
     const loadData = async () => {
+      if (!res.ok) {
+        throw new Error(`HTTP error ${res.status}`);
+      }
       try {
+        console.log(`${API_URL}/homepage/${timeRange}`);
         const res = await fetch(`${API_URL}/homepage/${timeRange}`);
+
         const data = await res.json();
-        console.log("wtf:\n", data);
+        console.log("Data:\n", data);
         setResults(data);
       } catch (error) {
         console.error("Error while fetch", error);
