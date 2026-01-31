@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from "react";
-import fs from "fs";
-import path from "path";
 import "./stles/homepage.css";
 import SentimentCard from "./SentimentCard";
 // import SentimentCard from "./SentimentCard";
+import 'dotenv/config'; 
+
+const API_URL = process.env.API_KEY;
 
 const homepage = () => {
   const [results, setResults] = useState([]);
@@ -24,7 +25,7 @@ const homepage = () => {
   useEffect(() => {
     const loadData = async () => {
       try {
-        const res = await fetch(`http://localhost:5000/homepage/${timeRange}`);
+        const res = await fetch(`${API_URL}/homepage/${timeRange}`);
         const data = await res.json();
         console.log("wtf:\n", data);
         setResults(data);
