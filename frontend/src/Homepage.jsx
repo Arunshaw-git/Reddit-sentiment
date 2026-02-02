@@ -2,13 +2,15 @@ import React, { useEffect, useState } from "react";
 import "./stles/homepage.css";
 import SentimentCard from "./SentimentCard";
 
-const API_URL = import.meta.env.VITE_API_URL;
+const API_URL = import.meta.env.VITE_API_URL ;
 console.log("API URL:", API_URL);
 
 const homepage = () => {
   const [results, setResults] = useState([]);
   const [timeRange, setTimeRange] = useState("today");
   const timeRanges = ["today", "week", "month", "year"];
+  const [expandedIndex, setExpandedIndex] = useState(null);
+  
   // useEffect(async () => {
   //   try {
   //     const res = await fetch("http://localhost:5000/homepage/today");
@@ -25,7 +27,6 @@ const homepage = () => {
     const loadData = async () => {
       try {
         const res = await fetch(`${API_URL}/homepage/${timeRange}`);
-        
 
         const data = await res.json();
         console.log("Data:\n", data);
@@ -80,7 +81,15 @@ const homepage = () => {
 
       <div className="row">
         {results.map((el, i) => {
-          return <SentimentCard key={i} i={i} el={el}></SentimentCard>;
+          return (
+            <SentimentCard
+              key={i}
+              i={i}
+              el={el}
+              expanded={expandedIndex === i}
+              onToggle={() => setExpandedIndex(expandedIndex === i ? null : i)}
+            ></SentimentCard>
+          );
         })}
       </div>
     </div>

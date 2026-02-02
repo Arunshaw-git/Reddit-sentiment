@@ -1,12 +1,12 @@
 import React, { useState } from "react";
 import "./stles/homepage.css";
-const SentimentCard = ({ el, i }) => {
-  const [expanded, setExpanded] = useState(false);
+
+const SentimentCard = ({ el, i, expanded, onToggle}) => {
 
   return (
     <li
       className={`result-item ${expanded ? "expanded" : ""}`}
-      onClick={() => setExpanded((prev) => !prev)}
+      onClick={onToggle}
     >
       <div className="list">
         <div className="left">

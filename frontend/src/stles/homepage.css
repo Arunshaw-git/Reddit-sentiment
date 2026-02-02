@@ -10,18 +10,12 @@ body {
 
 body {
   margin: 0;
-  background: linear-gradient(
-    135deg,
-      #020617,
-    #0f172a,
-    #1e293b
-  );
+  background: linear-gradient(135deg, #020617, #0f172a, #1e293b);
   background-attachment: fixed;
-  
 }
 
-.main{
-  color:white;
+.main {
+  color: white;
 }
 
 .logo {
@@ -30,7 +24,6 @@ body {
   display: inline-block; /* REQUIRED */
   transform: scaleY(1.8);
   letter-spacing: 2px;
-
 }
 .result-item {
   width: 260px;
@@ -49,7 +42,6 @@ body {
   position: relative;
   margin-bottom: 6px;
   overflow: hidden;
-
   transition:
     height 0.4s ease,
     font 0.4s ease,
@@ -58,7 +50,7 @@ body {
 }
 .result-item.expanded {
   height: 360px;
-  font-size: x-large;
+  font-size: large;
   transform: scale(1.03);
 }
 
@@ -100,13 +92,12 @@ body {
   align-items: flex-start; /* or center */
   gap: 16px;
 }
-.sentiment.negative{
-  color:rgb(255, 0, 0)
-
+.sentiment.negative {
+  color: rgb(255, 0, 0);
 }
-.sentiment.positive{
-  color:#00ff4c
+.sentiment.positive {
+  color: #00ff4c;
 }
-.sentiment.neutral{
-  color:#ecf1f1
+.sentiment.neutral {
+  color: #ecf1f1;
 }
