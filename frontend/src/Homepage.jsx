@@ -24,11 +24,8 @@ const homepage = () => {
   useEffect(() => {
     const loadData = async () => {
       try {
-        console.log(`${API_URL}/homepage/${timeRange}`);
         const res = await fetch(`${API_URL}/homepage/${timeRange}`);
-        if (!res.ok) {
-          throw new Error(`HTTP error ${res.status}`);
-        }
+        
 
         const data = await res.json();
         console.log("Data:\n", data);

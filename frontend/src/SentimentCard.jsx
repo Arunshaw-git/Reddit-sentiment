@@ -14,7 +14,7 @@ const SentimentCard = ({ el, i }) => {
         </div>
 
         <div className="content">
-          <h2 className="assetName">{el.ticker}</h2>
+          <h2 className="assetName">{el.asset}</h2>
           <span className={`sentiment ${el.sentiment}`}>{el.sentiment}</span>
           <p className="reasoning">{el.reasoning}</p>
         </div>
