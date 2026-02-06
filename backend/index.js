@@ -12,7 +12,7 @@ const __dirname = dirname(__filename);
 const app = express();
 import routes from "./routes/health.js";
 
-app.use(healthRoutes);
+app.use(routes);
 // const pythonPath = path.join(
 //   process.cwd(),
 
