@@ -1,3 +1,4 @@
+from db import save_sentiment_results
 import requests 
 import json 
 import sys
@@ -7,12 +8,9 @@ sys.stdout.flush()
 sys.stdout.reconfigure(encoding="utf-8")
 sys.stderr.reconfigure(encoding="utf-8")
 import os
-from dotenv import load_dotenv
 import datetime
-from pathlib import Path
-env_path = Path(__file__).resolve().parents[1] / ".env"
-print("Loaded env from:", env_path)
-load_dotenv(env_path)
+import config
+
 # from openai import OpenAI
 from google import genai
 import re
@@ -29,7 +27,7 @@ Investments can be:
 
 Rules:
 - Merge duplicate investments into one entry
--Reasoning should not contain metadata about posts but the reason mentioned in the posts and comments.  
+-Reasoning should not contain metadata about posts but the reason mentioned in the posts and comments with some more relavant data from the internet but not any personal bad experience like they bought at the top and are in loss right now.  
 
 Output ONLY a valid JSON array of objects.
 No markdown, no code blocks, no extra text.
@@ -222,9 +220,6 @@ for timeRange in timeRanges:
 
     # final_results = merge_results(all_results)
     parsed = cleanResutIntoJson(response.text)
-    print("\n ResultSavedOrNot:",saveDataInJson(
-        parsed,
-        timeRange
-    ))
+    print("\n ResultSavedOrNot:",save_sentiment_results(parsed, timeRange))
     time.sleep(2)
     

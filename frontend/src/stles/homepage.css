@@ -24,6 +24,7 @@ body {
   display: inline-block; /* REQUIRED */
   transform: scaleY(1.8);
   letter-spacing: 2px;
+  padding-top: 10px;
 }
 .result-item {
   width: 260px;

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import "./stles/homepage.css";
 import SentimentCard from "./SentimentCard";
 
-const API_URL = import.meta.env.VITE_API_URL ;
+const API_URL =  import.meta.env.VITE_API_URL || "http://localhost:5000";
 console.log("API URL:", API_URL);
 
 const homepage = () => {
@@ -42,7 +42,7 @@ const homepage = () => {
   return (
     <div className="container my-2 ">
       <div className="text-center my-3">
-        <h1 className="logo">REDDIT BASED SENTIMENT</h1>
+        <h1 className="logo">REDDIT'S SENTIMENT</h1>
       </div>
 
       <p className="text-center" style={{ color: "white" }}>
