@@ -193,45 +193,39 @@ if not api_key:
 
 client = genai.Client(api_key=os.getenv("GEMINI_API_KEY"))
 
-# for timeRange in timeRanges:
-#     cleanedposts = []
-#     completedTimeRange = "" 
-#     for community in communities:
-#         res = requests.get(f"https://www.reddit.com/r/{community}/top.json?t={timeRange}/", headers=HEADERS)
+for timeRange in timeRanges:
+    cleanedposts = []
+    completedTimeRange = "" 
+    for community in communities:
+        res = requests.get(f"https://www.reddit.com/r/{community}/top.json?t={timeRange}/", headers=HEADERS)
 
-#         if res.status_code != 200:
-#             print(f"couldnt get posts for the ${community} ",res)
-#             continue
-#         cleanedposts.extend(cleaningThePosts(res.json()))
+        if res.status_code != 200:
+            print(f"couldnt get posts for the ${community} ",res)
+            continue
+        cleanedposts.extend(cleaningThePosts(res.json()))
               
-#     print(f"\n\n Cleaned posts for {timeRange}:",cleanedposts)
-#     # all_results = []
-#     if cleanedposts:
-#         promptwithdata = prompt + json.dumps(cleanedposts)
-#         print("running the llm")
-#         try:
-#             print("Calling Gemini...")
-#             response = client.models.generate_content(
-#             model="gemini-2.5-flash", contents=promptwithdata      
-#             )
-#         except Exception as e:
-#             print("Gemini call failed", repr(e))
-#             raise
-#     # for chunk in chunk_list(cleanedposts, 1):
-#     #     print("\nchunk:",chunk)
-#     #     chunk_results = analyze_chunk(chunk)
-#     #     all_results.extend(chunk_results)
+    print(f"\n\n Cleaned posts for {timeRange}:",cleanedposts)
+    # all_results = []
+    if cleanedposts:
+        promptwithdata = prompt + json.dumps(cleanedposts)
+        print("running the llm")
+        try:
+            print("Calling Gemini...")
+            response = client.models.generate_content(
+            model="gemini-2.5-flash", contents=promptwithdata      
+            )
+        except Exception as e:
+            print("Gemini call failed", repr(e))
+            raise
+    # for chunk in chunk_list(cleanedposts, 1):
+    #     print("\nchunk:",chunk)
+    #     chunk_results = analyze_chunk(chunk)
+    #     all_results.extend(chunk_results)
 
-#     # final_results = merge_results(all_results)
-#     parsed = cleanResutIntoJson(response.text)
+    # final_results = merge_results(all_results)
+    parsed = cleanResutIntoJson(response.text)
 
-#     print("Gemini:\n",parsed)
-#     print("\n ResultSavedOrNot:",save_sentiment_results(parsed, timeRange))
-#     time.sleep(2)
-parsed = [  {
-    "asset": "SLV",
-    "sentiment": "neutral",
-    "reasoning": "Investor used it as a primary holding for silver, implying belief in silver's price movement, and plans to hold."
-  }
-]
-print("\n ResultSavedOrNot:",save_sentiment_results(parsed, "today"))
+    print("Gemini:\n",parsed)
+    print("\n ResultSavedOrNot:",save_sentiment_results(parsed, timeRange))
+    time.sleep(2)
+
