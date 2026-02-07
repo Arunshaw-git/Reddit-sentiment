@@ -11,7 +11,6 @@ import os
 import datetime
 import config
 
-# from openai import OpenAI
 from google import genai
 import re
 
@@ -149,6 +148,7 @@ def getCleanComments(link):
     res = requests.get(f"https://www.reddit.com{link}.json" , headers=HEADERS)
 
     if res.status_code != 200:
+        print("\nstatus code 200 while fetching comments\n")
         return []
 
     comments = res.json()
@@ -192,7 +192,6 @@ if not api_key:
     raise RuntimeError("GEMINI_API_KEY not loaded. Check .env path.")
 
 client = genai.Client(api_key=os.getenv("GEMINI_API_KEY"))
-print("GEMINI_API_KEY:", os.getenv("GEMINI_API_KEY"))
 
 for timeRange in timeRanges:
     cleanedposts = []
@@ -201,7 +200,7 @@ for timeRange in timeRanges:
         res = requests.get(f"https://www.reddit.com/r/{community}/top.json?t={timeRange}/", headers=HEADERS)
 
         if res.status_code != 200:
-            print("!200",res)
+            print(f"couldnt get posts for the ${community} ",res)
             continue
         cleanedposts.extend(cleaningThePosts(res.json()))
               
@@ -209,10 +208,15 @@ for timeRange in timeRanges:
     # all_results = []
     
     promptwithdata = prompt + json.dumps(cleanedposts)
-
-    response = client.models.generate_content(
+    print("running the llm")
+    try:
+        print("Calling Gemini...")
+        response = client.models.generate_content(
         model="gemini-2.5-flash", contents=promptwithdata      
-    )
+        )
+    except Exception as e:
+        print("Gemini call failed", repr(e))
+        raise
     # for chunk in chunk_list(cleanedposts, 1):
     #     print("\nchunk:",chunk)
     #     chunk_results = analyze_chunk(chunk)
