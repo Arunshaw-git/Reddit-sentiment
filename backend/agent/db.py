@@ -3,13 +3,13 @@ import mysql.connector
 import config
 
 def get_db_connection():
-    is_prod = os.getenv("ENV") == "production"
+    is_prod = os.getenv("NODE_ENV") == "production"
 
     print("HOST:", os.getenv("MYSQL_HOST"))
     print("PORT:", os.getenv("MYSQL_PORT"))
     print("USER:", os.getenv("MYSQL_USER"))
     print("DB:", os.getenv("MYSQL_DB"))
-
+    print("PROD:", is_prod)
     config = {
         "host": os.getenv("MYSQL_HOST"),
         "port": int(os.getenv("MYSQL_PORT", 3306)),
@@ -19,7 +19,10 @@ def get_db_connection():
     }
 
     if is_prod:
-        config["ssl_disabled"] = False
+        config.update({
+            "ssl_disabled": False,
+            "ssl_verify_cert": False,
+        })
 
     return mysql.connector.connect(**config)
 

@@ -179,7 +179,7 @@ def cleaningThePosts(wholePostsJson):
             "comments":getCleanComments(post["permalink"])
         })
         
-    return cleaned
+    return cleaned[:15]
 
 
 # client = OpenAI(
@@ -206,17 +206,17 @@ for timeRange in timeRanges:
               
     print(f"\n\n Cleaned posts for {timeRange}:",cleanedposts)
     # all_results = []
-    
-    promptwithdata = prompt + json.dumps(cleanedposts)
-    print("running the llm")
-    try:
-        print("Calling Gemini...")
-        response = client.models.generate_content(
-        model="gemini-2.5-flash", contents=promptwithdata      
-        )
-    except Exception as e:
-        print("Gemini call failed", repr(e))
-        raise
+    if cleanedposts:
+        promptwithdata = prompt + json.dumps(cleanedposts)
+        print("running the llm")
+        try:
+            print("Calling Gemini...")
+            response = client.models.generate_content(
+            model="gemini-2.5-flash", contents=promptwithdata      
+            )
+        except Exception as e:
+            print("Gemini call failed", repr(e))
+            raise
     # for chunk in chunk_list(cleanedposts, 1):
     #     print("\nchunk:",chunk)
     #     chunk_results = analyze_chunk(chunk)
@@ -224,6 +224,8 @@ for timeRange in timeRanges:
 
     # final_results = merge_results(all_results)
     parsed = cleanResutIntoJson(response.text)
+
+    print("Gemini:\n",parsed)
     print("\n ResultSavedOrNot:",save_sentiment_results(parsed, timeRange))
     time.sleep(2)
     
