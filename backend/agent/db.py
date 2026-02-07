@@ -8,14 +8,15 @@ def get_db_connection():
     print("HOST:", os.getenv("MYSQL_HOST"))
     print("PORT:", os.getenv("MYSQL_PORT"))
     print("USER:", os.getenv("MYSQL_USER"))
-    print("DB:", os.getenv("MYSQL_DB"))
+    print("DB:", os.getenv("MYSQL_DATABASE"))
     print("PROD:", is_prod)
+    
     config = {
         "host": os.getenv("MYSQL_HOST"),
         "port": int(os.getenv("MYSQL_PORT", 3306)),
         "user": os.getenv("MYSQL_USER"),
         "password": os.getenv("MYSQL_PASSWORD"),
-        "database": os.getenv("MYSQL_DB"),
+        "database": os.getenv("MYSQL_DATABASE"),
     }
 
     if is_prod:
