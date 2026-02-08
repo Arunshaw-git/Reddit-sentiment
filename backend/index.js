@@ -94,12 +94,12 @@ app.listen(5000, () => {
   if (!agentStarted) {
     agentStarted = true;
     // if (!fileName || !fileName.startsWith(`today_${date}`)) runAgent();
-    // setTimeout(
-    //   () => {
-    //     runAgent();
-    //   },
-    //   1000 * 60 * 60 * 24,
-    // );
     runAgent()
+    setTimeout(
+      () => {
+        runAgent();
+      },
+      1000 * 60 * 60 * 24,
+    );
   }
 });
