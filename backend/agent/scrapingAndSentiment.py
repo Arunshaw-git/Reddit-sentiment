@@ -206,9 +206,10 @@ for timeRange in timeRanges:
               
     print(f"\n\n Cleaned posts for {timeRange}:",cleanedposts)
     # all_results = []
-    if cleanedposts:
+    if cleanedposts :
         promptwithdata = prompt + json.dumps(cleanedposts)
         print("running the llm")
+        print("Prompt with data: ", promptwithdata)
         try:
             print("Calling Gemini...")
             response = client.models.generate_content(
@@ -217,6 +218,10 @@ for timeRange in timeRanges:
         except Exception as e:
             print("Gemini call failed", repr(e))
             raise
+    else:
+        print(f"No cleaned posts for this {timeRange}")
+        response =[]
+    
     # for chunk in chunk_list(cleanedposts, 1):
     #     print("\nchunk:",chunk)
     #     chunk_results = analyze_chunk(chunk)
@@ -226,6 +231,9 @@ for timeRange in timeRanges:
     parsed = cleanResutIntoJson(response.text)
 
     print("Gemini:\n",parsed)
-    print("\n ResultSavedOrNot:",save_sentiment_results(parsed, timeRange))
-    time.sleep(2)
+    if parsed:
+         print("\n ResultSavedOrNot:",save_sentiment_results(parsed, timeRange))
+    else:
+        print(f"No data saving for this {timeRange}")
+    time.sleep(4)
 

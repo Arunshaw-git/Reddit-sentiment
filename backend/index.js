@@ -94,7 +94,6 @@ app.listen(5000, () => {
   if (!agentStarted) {
     agentStarted = true;
     // if (!fileName || !fileName.startsWith(`today_${date}`)) runAgent();
-    runAgent()
     setTimeout(
       () => {
         runAgent();
