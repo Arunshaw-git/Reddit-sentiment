@@ -10,7 +10,7 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 const app = express();
 import routes from "./routes/health.js";
-const { client, connectRedis } = require("./db/redis");
+import { client, connectRedis } from ("./db/redis");
 
 connectRedis();
 app.use(routes);
@@ -72,7 +72,7 @@ app.get("/homepage/:t", async (req, res) => {
       "SELECT asset, sentiment, reasoning FROM sentiment_results WHERE time_range = ?",
       [t],
     );
-     // 🔹 3. Store in Redis (5 min cache)
+     // Redis 
     await client.setEx(cacheKey, 3600, JSON.stringify(rows));
     res.json(rows);
   } catch (error) {
