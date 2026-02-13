@@ -8,10 +8,11 @@ import { spawn } from "child_process";
 import pool from "./db/db.js";
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
-
 const app = express();
 import routes from "./routes/health.js";
+const { client, connectRedis } = require("./db/redis");
 
+connectRedis();
 app.use(routes);
 // const pythonPath = path.join(
 //   process.cwd(),
@@ -35,6 +36,18 @@ app.use(
 
 app.use(express.json());
 
+app.get("/invalidate/:t",async (req,res)=>{
+  const {t} = req.params;
+  const cachedKey = `homepage:${t}`;
+  try{
+    await client.del(cachedKey)
+    res.json({message:"Cache removed"})
+  }
+  catch(err){
+    res.status(500).json({error:"FAiled to remove cache"})
+  }
+
+})
 app.get("/homepage/:t", async (req, res) => {
   const { t } = req.params;
   // const dirPath = path.join(__dirname, "agent", "results", t);
@@ -44,17 +57,28 @@ app.get("/homepage/:t", async (req, res) => {
   // var filePath = path.join(dirPath, jsonFile);
 
   // console.log("FilePath: \n", filePath);
-  try {
-    const [rows] = await pool.query(
-    "SELECT asset, sentiment, reasoning FROM sentiment_results WHERE time_range = ?",
-    [t],
-  );
-  res.json(rows)
-  } catch (error) {
-    console.log("Error while executing fetching: \n", error)
-    res.status(500).json({error:"DB Error"})
-  }
 
+  const cacheKey = `homepage:${t}`;
+
+  try {
+    const cached = await client.get(cacheKey);
+
+    if (cached) {
+      console.log("Cache found; returing data from redis");
+      return res.json(JSON.parse(cached));
+    }
+ 
+    const [rows] = await pool.query(
+      "SELECT asset, sentiment, reasoning FROM sentiment_results WHERE time_range = ?",
+      [t],
+    );
+     // 🔹 3. Store in Redis (5 min cache)
+    await client.setEx(cacheKey, 3600, JSON.stringify(rows));
+    res.json(rows);
+  } catch (error) {
+    console.log("Error while executing fetching: \n", error);
+    res.status(500).json({ error: "DB Error" });
+  }
 });
 
 function runAgent() {
