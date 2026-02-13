@@ -10,7 +10,7 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 const app = express();
 import routes from "./routes/health.js";
-import { client, connectRedis } from "./db/redis";
+import { client, connectRedis } from "./db/redis.js";
 
 connectRedis();
 app.use(routes);
