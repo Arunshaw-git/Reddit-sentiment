@@ -1,17 +1,22 @@
 import express from "express";
-import pool from "../db/db.js";
+import { mongoose } from "../db/db.js";
 
 const router = express.Router();
 
 router.get("/health/db", async (req, res) => {
  try {
-    await pool.query("SELECT 1");
-    res.json({ status: "ok", db: "connected" });
+    // Check if the connection state is 'connected' (1)
+    if (mongoose.connection.readyState === 1) {
+      res.json({ status: "ok", db: "mongodb", state: "connected" });
+    } else {
+      throw new Error("MongoDB not connected");
+    }
   } catch (err) {
     console.error("DB HEALTH CHECK FAILED:", err.message);
     res.status(500).json({
       status: "error",
-      db: "disconnected",
+      db: "mongodb",
+      state: "disconnected",
       error: err.message,
     });
   }

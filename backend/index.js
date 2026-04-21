@@ -5,7 +5,7 @@ import { fileURLToPath } from "url";
 import { dirname } from "path";
 import cors from "cors";
 import { spawn } from "child_process";
-import pool from "./db/db.js";
+import { SentimentResult } from "./db/db.js";
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 const app = express();
@@ -68,9 +68,9 @@ app.get("/homepage/:t", async (req, res) => {
       return res.json(JSON.parse(cached));
     }
  
-    const [rows] = await pool.query(
-      "SELECT asset, sentiment, reasoning FROM sentiment_results WHERE time_range = ?",
-      [t],
+    const rows = await SentimentResult.find(
+      { time_range: t },
+      { asset: 1, sentiment: 1, reasoning: 1, _id: 0 }
     );
      // Redis 
     await client.setEx(cacheKey, 3600, JSON.stringify(rows));

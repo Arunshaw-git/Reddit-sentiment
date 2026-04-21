@@ -1,26 +1,22 @@
-import mysql from "mysql2/promise";
+import mongoose from "mongoose";
 import "dotenv/config";
 
-const isProd = process.env.NODE_ENV === "production";
+const mongoUri = process.env.MONGO_URI || "mongodb://localhost:27017/reddit_sentiment";
 
-const pool = mysql.createPool({
-  host: process.env.MYSQL_HOST,
-  port: Number(process.env.MYSQL_PORT),
-  user: process.env.MYSQL_USER,
-  password: process.env.MYSQL_PASSWORD,
-  database: process.env.MYSQL_DATABASE,
+mongoose.connect(mongoUri)
+  .then(() => console.log("MongoDB connected successfully"))
+  .catch((err) => console.error("MongoDB connection error:", err));
 
-  waitForConnections: true,
-  connectionLimit: 10,
-  queueLimit: 0,
-
-  ...(isProd && {
-    ssl: {
-      rejectUnauthorized: false,
-    },
-  }),
+const sentimentResultSchema = new mongoose.Schema({
+  id: { type: Number, unique: true },
+  time_range: { type: String, enum: ['today', 'week', 'month', 'year'] },
+  sentiment: { type: String, enum: ['positive', 'negative', 'mixed', 'neutral'] },
+  asset: { type: String, maxlength: 150 },
+  reasoning: String,
+  created_at: { type: Date, default: Date.now }
 });
 
-console.log("MySQL pool created");
+const SentimentResult = mongoose.model("SentimentResult", sentimentResultSchema);
 
-export default pool;
+export { mongoose, SentimentResult };
+export default mongoose.connection;

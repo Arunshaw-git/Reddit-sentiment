@@ -1,56 +1,52 @@
 import os
-import mysql.connector 
+from pymongo import MongoClient
+from datetime import datetime
 import config
 
 def get_db_connection():
-    is_prod = os.getenv("NODE_ENV") == "production"
+    mongo_uri = os.getenv("MONGO_URI", "mongodb://localhost:27017/reddit_sentiment")
+    client = MongoClient(mongo_uri)
+    # Extract database name from URI or use default
+    db_name = mongo_uri.split("/")[-1].split("?")[0] or "reddit_sentiment"
+    return client[db_name]
 
-    print("HOST:", os.getenv("MYSQL_HOST"))
-    print("PORT:", os.getenv("MYSQL_PORT"))
-    print("USER:", os.getenv("MYSQL_USER"))
-    print("DB:", os.getenv("MYSQL_DATABASE"))
-    print("PROD:", is_prod)
-    
-    config = {
-        "host": os.getenv("MYSQL_HOST"),
-        "port": int(os.getenv("MYSQL_PORT", 3306)),
-        "user": os.getenv("MYSQL_USER"),
-        "password": os.getenv("MYSQL_PASSWORD"),
-        "database": os.getenv("MYSQL_DATABASE"),
-    }
-
-    if is_prod:
-        config.update({
-            "ssl_disabled": False,
-            "ssl_verify_cert": False,
-        })
-
-    return mysql.connector.connect(**config)
+def get_next_id(db, collection_name):
+    """
+    Implements auto-incrementing ID pattern for MongoDB.
+    """
+    counter = db.counters.find_one_and_update(
+        {"_id": collection_name},
+        {"$inc": {"seq": 1}},
+        upsert=True,
+        return_document=True
+    )
+    return counter["seq"]
 
 def save_sentiment_results(data, time_range):
-    conn = get_db_connection()
-    cursor = conn.cursor()
-
-    cursor.execute("DELETE FROM sentiment_results WHERE time_range = %s",(time_range,)
-    )
-    insert_sql = """
-        insert into sentiment_results
-        (time_range, sentiment, asset, reasoning)
-        values (%s,%s,%s,%s)
-    """
-    rows = [] 
-    for item in data: 
-        rows.append((
-            time_range,
-            item["sentiment"],
-            item["asset"],
-            item.get("reasoning",""),
-        ))
-
-    if rows:
-        cursor.executemany(insert_sql,rows)
-
-    conn.commit()
-    cursor.close()
-    conn.close()    
+    db = get_db_connection()
+    collection = db.sentiment_results
+    
+    # Delete existing results for the time_range
+    collection.delete_many({"time_range": time_range})
+    
+    documents = []
+    for item in data:
+        # Get next auto-incrementing ID
+        doc_id = get_next_id(db, "sentiment_results")
+        
+        documents.append({
+            "id": doc_id,
+            "time_range": time_range,
+            "sentiment": item["sentiment"],
+            "asset": item["asset"],
+            "reasoning": item.get("reasoning", ""),
+            "created_at": datetime.utcnow()
+        })
+    
+    if documents:
+        collection.insert_many(documents)
+    
+    # Connection is closed automatically when the client object is garbage collected, 
+    # but for MongoClient it's usually fine to keep it or let it be handled.
+    # db.client.close()
 
