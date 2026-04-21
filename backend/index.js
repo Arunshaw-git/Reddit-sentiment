@@ -66,7 +66,7 @@ app.get("/homepage/:t", async (req, res) => {
   //   console.log("Cache found; returing data from redis");
   //   return res.json(JSON.parse(cached));
   // }
- 
+  try {
     const rows = await SentimentResult.find(
       { time_range: t },
       { asset: 1, sentiment: 1, reasoning: 1, _id: 0 }
