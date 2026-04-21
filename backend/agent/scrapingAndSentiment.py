@@ -233,7 +233,7 @@ for timeRange in timeRanges:
     print("Gemini:\n",parsed)
     if parsed:
         print("\n ResultSavedOrNot:",save_sentiment_results(parsed, timeRange))
-        requests.get(f"https://reddit-sentiment-0l0e.onrender.com/invalidate/{timeRange}")
+        # requests.get(f"https://reddit-sentiment-0l0e.onrender.com/invalidate/{timeRange}")
     else:
         print(f"No data saving for this {timeRange}")
     time.sleep(4)
