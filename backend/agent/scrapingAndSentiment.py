@@ -12,7 +12,9 @@ import datetime
 import config
 
 from google import genai
+from google.genai import errors
 import re
+from tenacity import retry, stop_after_attempt, wait_exponential, retry_if_exception_type
 
 HEADERS = {
     "User-Agent": "reddit-stock-sentiment/0.1 by Arun"
@@ -61,49 +63,6 @@ def cleanResutIntoJson(result):
     return json.loads(text)
 
 
-# def chunk_list(data, size):
-#     for i in range(0, len(data), size):
-#         yield data[i:i + size]
-
-
-# def analyze_chunk(posts_chunk):
-#     print("\nrunning the ai api \n")
-#     post = json.dumps(posts_chunk)
-#     response = client.chat.completions.create(
-#         model="deepseek/deepseek-r1-0528:free",
-#         messages=[
-#             {"role": "system", "content": SYSTEM_PROMPT},
-#             {"role": "user", "content":post}
-#         ],
-#         temperature=0
-#     )
-
-#     content = response.choices[0].message.content.strip()
-#     print("\nop per chunk:\n",content)
-#     if not content:
-#         return []
-
-#     try:
-#         return json.loads(content)
-#     except Exception:
-#         print("❌ JSON parse failed:", content)
-#         return []
-
-
-# def merge_results(results):
-#     merged = {}
-
-#     for item in results:
-#         ticker = item["ticker"]
-
-#         if ticker not in merged:
-#             merged[ticker] = item
-#         else:
-#             # simple sentiment dominance logic
-#             if merged[ticker]["sentiment"] != item["sentiment"]:
-#                 merged[ticker]["sentiment"] = "neutral"
-
-#     return list(merged.values())
 import os
 import shutil
 
@@ -182,16 +141,50 @@ def cleaningThePosts(wholePostsJson):
     return cleaned[:6]
 
 
-# client = OpenAI(
-#   base_url="https://openrouter.ai/api/v1",
-#   api_key=os.getenv("OPENROUTER_API_KEY"),
-# )
 api_key = os.getenv("GEMINI_API_KEY")
 
 if not api_key:
     raise RuntimeError("GEMINI_API_KEY not loaded. Check .env path.")
 
 client = genai.Client(api_key=os.getenv("GEMINI_API_KEY"))
+
+@retry(
+    stop=stop_after_attempt(3),
+    wait=wait_exponential(multiplier=2, min=4, max=30),
+    retry=retry_if_exception_type(errors.ServerError),
+    before_sleep=lambda retry_state: print(f"Retrying Gemini call (attempt {retry_state.attempt_number}) due to high demand...")
+)
+def generate_content_with_retry(client, model, content):
+    return client.models.generate_content(model=model, contents=content)
+
+def analyze_sentiment(client, content):
+    # Optimized list of the most performant models
+    models = [
+        "gemini-3-flash-preview",
+        "gemini-2.5-flash", 
+        "gemini-2.0-flash"
+    ]
+    last_error = None
+    
+    for model_name in models:
+        try:
+            print(f"Attempting analysis with {model_name}...")
+            return generate_content_with_retry(client, model_name, content)
+        except errors.ServerError as e:
+            print(f"Model {model_name} is currently overloaded (503). Trying fallback...")
+            last_error = e
+            continue
+        except errors.ClientError as e:
+            print(f"Model {model_name} not available or invalid (404/400). Trying fallback...")
+            last_error = e
+            continue
+        except Exception as e:
+            print(f"Unexpected error with model {model_name}: {repr(e)}")
+            raise e
+            
+    if last_error:
+        print("CRITICAL: All Gemini models are currently experiencing high demand.")
+    raise last_error if last_error else Exception("No active models available")
 
 for timeRange in timeRanges:
     cleanedposts = []
@@ -203,38 +196,24 @@ for timeRange in timeRanges:
             print(f"couldnt get posts for the ${community} ",res)
             continue
         cleanedposts.extend(cleaningThePosts(res.json()))
+        time.sleep(2) # Avoid Reddit 429s
               
     print(f"\n\n Cleaned posts for {timeRange}:",cleanedposts)
-    # all_results = []
+    
     if cleanedposts :
         promptwithdata = prompt + json.dumps(cleanedposts)
         print("running the llm")
-        print("Prompt with data: ", promptwithdata)
         try:
-            print("Calling Gemini...")
-            response = client.models.generate_content(
-            model="gemini-2.5-flash", contents=promptwithdata      
-            )
+            response = analyze_sentiment(client, promptwithdata)
+            parsed = cleanResutIntoJson(response.text)
+            print("Gemini:\n", parsed)
+            if parsed:
+                print("\n ResultSavedOrNot:", save_sentiment_results(parsed, timeRange))
+            else:
+                print(f"No data saving for this {timeRange}")
         except Exception as e:
-            print("Gemini call failed", repr(e))
-            raise
+            print("Gemini call failed after all retries and fallbacks", repr(e))
     else:
         print(f"No cleaned posts for this {timeRange}")
-        response =[]
     
-    # for chunk in chunk_list(cleanedposts, 1):
-    #     print("\nchunk:",chunk)
-    #     chunk_results = analyze_chunk(chunk)
-    #     all_results.extend(chunk_results)
-
-    # final_results = merge_results(all_results)
-    parsed = cleanResutIntoJson(response.text)
-
-    print("Gemini:\n",parsed)
-    if parsed:
-        print("\n ResultSavedOrNot:",save_sentiment_results(parsed, timeRange))
-        # requests.get(f"https://reddit-sentiment-0l0e.onrender.com/invalidate/{timeRange}")
-    else:
-        print(f"No data saving for this {timeRange}")
     time.sleep(4)
-
