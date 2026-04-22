@@ -75,8 +75,12 @@ app.get("/homepage/:t", async (req, res) => {
     // await client.setEx(cacheKey, 3600, JSON.stringify(rows));
     res.json(rows);
   } catch (error) {
-    console.log("Error while executing fetching: \n", error);
-    res.status(500).json({ error: "DB Error" });
+    console.error("Error while fetching sentiment results:", error);
+    res.status(500).json({ 
+      error: "Database Query Error", 
+      message: error.message,
+      stack: process.env.NODE_ENV === 'production' ? null : error.stack 
+    });
   }
 });
 

@@ -14,7 +14,7 @@ const sentimentResultSchema = new mongoose.Schema({
   asset: { type: String, maxlength: 150 },
   reasoning: String,
   created_at: { type: Date, default: Date.now }
-});
+}, { collection: 'sentiment_results' });
 
 const SentimentResult = mongoose.model("SentimentResult", sentimentResultSchema);
 
