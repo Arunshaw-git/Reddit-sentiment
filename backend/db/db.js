@@ -3,7 +3,9 @@ import "dotenv/config";
 
 const mongoUri = process.env.MONGO_URI || "mongodb://localhost:27017/reddit_sentiment";
 
-mongoose.connect(mongoUri)
+mongoose.connect(mongoUri, {
+  dbName: 'reddit_sentiment'
+})
   .then(() => console.log("MongoDB connected successfully"))
   .catch((err) => console.error("MongoDB connection error:", err));
 

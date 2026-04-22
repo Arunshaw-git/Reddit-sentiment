@@ -36,18 +36,27 @@ app.use(
 
 app.use(express.json());
 
-// app.get("/invalidate/:t",async (req,res)=>{
-//   const {t} = req.params;
-//   const cachedKey = `homepage:${t}`;
-//   try{
-//     await client.del(cachedKey)
-//     res.json({message:"Cache removed"})
-//   }
-//   catch(err){
-//     res.status(500).json({error:"FAiled to remove cache"})
-//   }
-// 
-// })
+app.get("/run-agent", (req, res) => {
+  console.log("Manual trigger: Running agent...");
+  runAgent();
+  res.json({ message: "Agent started manually. Check Render logs for progress." });
+});
+
+app.get("/db-check", async (req, res) => {
+  try {
+    const count = await SentimentResult.countDocuments();
+    const sample = await SentimentResult.findOne().limit(1);
+    res.json({ 
+      database: "reddit_sentiment",
+      collection: "sentiment_results",
+      count,
+      sample 
+    });
+  } catch (err) {
+    res.status(500).json({ error: "Failed to check DB", message: err.message });
+  }
+});
+
 app.get("/homepage/:t", async (req, res) => {
   const { t } = req.params;
   // const dirPath = path.join(__dirname, "agent", "results", t);
@@ -71,15 +80,15 @@ app.get("/homepage/:t", async (req, res) => {
       { time_range: t },
       { asset: 1, sentiment: 1, reasoning: 1, _id: 0 }
     );
-     // Redis 
+    // Redis 
     // await client.setEx(cacheKey, 3600, JSON.stringify(rows));
     res.json(rows);
   } catch (error) {
     console.error("Error while fetching sentiment results:", error);
-    res.status(500).json({ 
-      error: "Database Query Error", 
+    res.status(500).json({
+      error: "Database Query Error",
       message: error.message,
-      stack: process.env.NODE_ENV === 'production' ? null : error.stack 
+      stack: process.env.NODE_ENV === 'production' ? null : error.stack
     });
   }
 });
