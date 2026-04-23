@@ -1,25 +1,49 @@
-import React, { useState } from "react";
-import "./stles/homepage.css";
+import React from "react";
 
-const SentimentCard = ({ el, i, expanded, onToggle}) => {
+const SentimentCard = ({ el, i, expanded, onToggle }) => {
+  const getSentimentIcon = (sentiment) => {
+    switch (sentiment?.toLowerCase()) {
+      case 'positive': return "↗";
+      case 'negative': return "↘";
+      default: return "−";
+    }
+  };
 
   return (
-    <li
-      className={`result-item ${expanded ? "expanded" : ""}`}
+    <div
+      className={`sentiment-card ${expanded ? "expanded" : ""}`}
       onClick={onToggle}
     >
-      <div className="list">
-        <div className="left">
-          <h1 className="index">{i}</h1>
-        </div>
+      <div className="card-ticker">
+        <span className="symbol" style={{ color: "#ffffff" }}>{el.asset}</span>
+        <span className="name">{el.asset_name || "Market Asset"}</span>
+      </div>
 
-        <div className="content">
-          <h2 className="assetName">{el.asset}</h2>
-          <span className={`sentiment ${el.sentiment}`}>{el.sentiment}</span>
-          <p className="reasoning">{el.reasoning}</p>
+      <div className="card-sentiment">
+        <span className="sentiment-label">Sentiment</span>
+        <div className={`sentiment-value ${el.sentiment?.toLowerCase()}`}>
+          <span className="icon">{getSentimentIcon(el.sentiment)}</span>
+          <span className="text">{el.sentiment?.toUpperCase()}</span>
         </div>
       </div>
-    </li>
+
+      <div className="card-reasoning-summary">
+        <span className="reason-label">Analysis Summary</span>
+        <p className="reason-text-inline">
+          {el.reasoning || "Analyzing latest Reddit discussions..."}
+        </p>
+      </div>
+
+      {/* Expanded details could still exist for extra long text if needed, 
+          but the main reason is now in the probability map's spot */}
+      {expanded && (
+        <div className="card-details-full">
+           <div className="divider"></div>
+           <p className="full-reasoning">{el.reasoning}</p>
+        </div>
+      )}
+    </div>
   );
 };
+
 export default SentimentCard;
