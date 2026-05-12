@@ -77,7 +77,7 @@ const Homepage = () => {
       {/* Footer */}
       <footer className="app-footer">
         <div className="footer-brand">SENTIMENT ANALYTICA</div>
-        <div className="footer-copy">© 2024 SENTIMENT ANALYTICA. ALL RIGHTS RESERVED. DATA IS DELAYED.</div>
+        <div className="footer-copy">Made by Arun Shaw 2026</div>
       </footer>
     </div>
   );
