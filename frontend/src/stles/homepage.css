@@ -55,6 +55,17 @@ body {
   opacity: 0.85;
 }
 
+.hero-bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: -1;
+  opacity: 1;
+}
+
 .hero-overlay {
   position: absolute;
   top: 0;
@@ -89,7 +100,8 @@ body {
   font-family: 'Orbitron', sans-serif;
   font-size: clamp(0.7rem, 2vw, 1.2rem);
   letter-spacing: 0.3em;
-  color: var(--text-dim);
+  color: var(--text-main);
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
   margin-bottom: 3rem;
   font-weight: 400;
 }
@@ -135,12 +147,28 @@ body {
 /* Data Section */
 .data-section {
   padding: 4rem 5%;
-  background: linear-gradient(180deg, rgba(15, 23, 42, 0.9) 0%, rgba(2, 6, 23, 0.8) 100%), 
-              url('../background/expand_this_image_202604230738.jpeg');
+  position: relative;
+  border-top: 1px solid rgba(147, 197, 253, 0.1);
+}
+
+.data-section::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: url('/herobg.jpeg');
   background-size: cover;
   background-position: center;
   background-attachment: fixed;
-  border-top: 1px solid rgba(147, 197, 253, 0.1);
+  filter: blur(3px);
+  z-index: -1;
+}
+
+.data-section > * {
+  position: relative;
+  z-index: 1;
 }
 
 .section-header {
@@ -156,7 +184,7 @@ body {
   font-family: 'Orbitron', sans-serif;
   font-size: 0.8rem;
   letter-spacing: 4px;
-  color: var(--primary-blue);
+  color: black;
 }
 
 .results-list {
@@ -170,7 +198,6 @@ body {
   background: rgba(255, 255, 255, 0.03);
   backdrop-filter: blur(16px) saturate(180%);
   -webkit-backdrop-filter: blur(16px) saturate(180%);
-  border: 1px solid rgba(255, 255, 255, 0.1);
   box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.1);
   padding: 1.5rem 2rem;
   display: grid;
@@ -183,10 +210,90 @@ body {
   border-radius: 4px;
 }
 
+/* Dynamic card colors based on hero image palette */
+.sentiment-card:nth-child(3n+1) {
+}
+
+.sentiment-card:nth-child(3n+1):hover {
+  background: rgba(147, 197, 253, 0.15);
+  border-color: #93c5fd;
+}
+
+.sentiment-card:nth-child(3n+2) {
+}
+
+.sentiment-card:nth-child(3n+2):hover {
+  background: rgba(251, 113, 133, 0.15);
+  border-color: #fb7185;
+}
+
+.sentiment-card:nth-child(3n+3) {
+}
+
+.sentiment-card:nth-child(3n+3):hover {
+  background: rgba(52, 211, 153, 0.15);
+  border-color: #34d399;
+}
+
 .sentiment-card:hover {
   transform: translateX(10px);
   border-color: var(--primary-blue);
   background: rgba(15, 23, 42, 0.9);
+}
+
+/* Override hover colors for each card variant */
+.sentiment-card:nth-child(3n+1):hover {
+  transform: translateX(10px);
+  background: rgba(15, 23, 42, 0.95);
+}
+
+.sentiment-card:nth-child(3n+1):hover .card-ticker .symbol,
+.sentiment-card:nth-child(3n+1):hover .card-ticker .name,
+.sentiment-card:nth-child(3n+1):hover .sentiment-label,
+.sentiment-card:nth-child(3n+1):hover .reason-label {
+  color: #f8fafc;
+}
+
+.sentiment-card:nth-child(3n+1):hover .reason-text-inline,
+.sentiment-card:nth-child(3n+1):hover .full-reasoning,
+.sentiment-card:nth-child(3n+1):hover .reasoning-text {
+  color: #e2e8f0;
+}
+
+.sentiment-card:nth-child(3n+2):hover {
+  transform: translateX(10px);
+  background: rgba(15, 23, 42, 0.95);
+}
+
+.sentiment-card:nth-child(3n+2):hover .card-ticker .symbol,
+.sentiment-card:nth-child(3n+2):hover .card-ticker .name,
+.sentiment-card:nth-child(3n+2):hover .sentiment-label,
+.sentiment-card:nth-child(3n+2):hover .reason-label {
+  color: #f8fafc;
+}
+
+.sentiment-card:nth-child(3n+2):hover .reason-text-inline,
+.sentiment-card:nth-child(3n+2):hover .full-reasoning,
+.sentiment-card:nth-child(3n+2):hover .reasoning-text {
+  color: #e2e8f0;
+}
+
+.sentiment-card:nth-child(3n+3):hover {
+  transform: translateX(10px);
+  background: rgba(15, 23, 42, 0.95);
+}
+
+.sentiment-card:nth-child(3n+3):hover .card-ticker .symbol,
+.sentiment-card:nth-child(3n+3):hover .card-ticker .name,
+.sentiment-card:nth-child(3n+3):hover .sentiment-label,
+.sentiment-card:nth-child(3n+3):hover .reason-label {
+  color: #f8fafc;
+}
+
+.sentiment-card:nth-child(3n+3):hover .reason-text-inline,
+.sentiment-card:nth-child(3n+3):hover .full-reasoning,
+.sentiment-card:nth-child(3n+3):hover .reasoning-text {
+  color: #e2e8f0;
 }
 
 .card-ticker .symbol {
@@ -194,23 +301,23 @@ body {
   font-size: 2.5rem;
   font-weight: 900;
   display: block;
+  color: black;
 }
 
 .card-ticker .name {
   font-size: 0.6rem;
-  color: var(--text-dim);
+  color: #1e293b;
   text-transform: uppercase;
   letter-spacing: 1px;
 }
 
 .card-sentiment {
-  border-left: 1px solid var(--border-blue);
   padding-left: 2rem;
 }
 
 .sentiment-label {
   font-size: 0.6rem;
-  color: var(--text-dim);
+  color: #1e293b;
   text-transform: uppercase;
   margin-bottom: 0.5rem;
   display: block;
@@ -230,21 +337,21 @@ body {
 
 .card-reasoning-summary {
   text-align: left;
-  border-left: 1px solid var(--border-blue);
   padding-left: 2rem;
 }
 
 .reason-label {
   font-size: 0.6rem;
-  color: var(--text-dim);
+  color: #1e293b;
   text-transform: uppercase;
   margin-bottom: 0.5rem;
   display: block;
 }
 
 .reason-text-inline {
-  font-size: 0.85rem;
-  color: var(--text-main);
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: #0f172a;
   line-height: 1.4;
   display: -webkit-box;
   -webkit-line-clamp: 2;
@@ -256,12 +363,11 @@ body {
   grid-column: 1 / -1;
   margin-top: 1.5rem;
   padding-top: 1rem;
-  border-top: 1px solid var(--border-blue);
 }
 
 .full-reasoning {
   font-size: 0.9rem;
-  color: var(--text-dim);
+  color: #334155;
   line-height: 1.6;
 }
 
@@ -277,17 +383,28 @@ body {
   border-color: var(--primary-blue);
 }
 
+.sentiment-card.expanded .card-ticker .name,
+.sentiment-card.expanded .sentiment-label,
+.sentiment-card.expanded .reason-label {
+  color: #f8fafc;
+}
+
+.sentiment-card.expanded .reason-text-inline,
+.sentiment-card.expanded .full-reasoning,
+.sentiment-card.expanded .reasoning-text {
+  color: #cbd5e1;
+}
+
 .sentiment-card.expanded .card-details {
   max-height: 500px;
   margin-top: 2rem;
   padding-top: 1rem;
-  border-top: 1px solid var(--border-blue);
 }
 
 .reasoning-text {
   font-size: 0.9rem;
   line-height: 1.6;
-  color: var(--text-dim);
+  color: #334155;
 }
 
 /* Footer */

@@ -15,7 +15,7 @@ const SentimentCard = ({ el, i, expanded, onToggle }) => {
       onClick={onToggle}
     >
       <div className="card-ticker">
-        <span className="symbol" style={{ color: "#ffffff" }}>{el.asset}</span>
+        <span className="symbol">{el.asset}</span>
         <span className="name">{el.asset_name || "Market Asset"}</span>
       </div>
 

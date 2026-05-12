@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "./stles/homepage.css";
 import SentimentCard from "./SentimentCard";
-import heroVideo from "./hero video/Waves_rolling_left_202604230655.mp4";
+import heroBg from "/herobg.jpeg";
 
 const API_URL = import.meta.env.VITE_API_URL || "http://localhost:5000";
 
@@ -28,23 +28,15 @@ const Homepage = () => {
     <div className="app-container">
       {/* Hero Section */}
       <section className="hero">
-        <video
-          className="hero-video"
-          autoPlay
-          loop
-          muted
-          playsInline
-        >
-          <source src={heroVideo} type="video/mp4" />
-        </video>
+        <img
+          className="hero-bg"
+          src={heroBg}
+          alt="Hero background"
+        />
 
         <div className="hero-content animate-in">
           <h1>ESCAPE <br /> THE <br /> <span className="outline">NOISE</span></h1>
           <p className="hero-tagline">RAW SIGNAL. UNFILTERED DATA. NO DISTRACTIONS.</p>
-          <div className="hero-actions">
-            <button className="btn-terminal">ACCESS TERMINAL</button>
-            <button className="btn-outline">VIEW PROTOCOLS</button>
-          </div>
         </div>
       </section>
 
