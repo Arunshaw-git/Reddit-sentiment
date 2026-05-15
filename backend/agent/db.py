@@ -40,6 +40,12 @@ def save_sentiment_results(data, time_range):
             "sentiment": item["sentiment"],
             "asset": item["asset"],
             "reasoning": item.get("reasoning", ""),
+            "url": item.get("url", ""),
+            "score": item.get("score", 0),
+            "subreddit": item.get("subreddit", ""),
+            "num_comments": item.get("num_comments", 0),
+            "upvote_ratio": item.get("upvote_ratio", 0),
+            "confidence": item.get("confidence", 0),
             "created_at": datetime.utcnow()
         })
     

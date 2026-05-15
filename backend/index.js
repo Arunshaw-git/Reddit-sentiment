@@ -46,11 +46,11 @@ app.get("/db-check", async (req, res) => {
   try {
     const count = await SentimentResult.countDocuments();
     const sample = await SentimentResult.findOne().limit(1);
-    res.json({ 
+    res.json({
       database: "reddit_sentiment",
       collection: "sentiment_results",
       count,
-      sample 
+      sample
     });
   } catch (err) {
     res.status(500).json({ error: "Failed to check DB", message: err.message });
@@ -78,7 +78,7 @@ app.get("/homepage/:t", async (req, res) => {
   try {
     const rows = await SentimentResult.find(
       { time_range: t },
-      { asset: 1, sentiment: 1, reasoning: 1, _id: 0 }
+      { asset: 1, sentiment: 1, reasoning: 1, url: 1, score: 1, subreddit: 1, num_comments: 1, upvote_ratio: 1, confidence: 1, _id: 0 }
     );
     // Redis 
     // await client.setEx(cacheKey, 3600, JSON.stringify(rows));
@@ -130,11 +130,12 @@ app.listen(5000, () => {
   if (!agentStarted) {
     agentStarted = true;
     // if (!fileName || !fileName.startsWith(`today_${date}`)) runAgent();
-    setTimeout(
-      () => {
-        runAgent();
-      },
-      1000 * 60 * 60 * 24,
-    );
+    // The agent is now an external service with its own scheduler.
+    // setInterval(
+    //   () => {
+    //     runAgent();
+    //   },
+    //   1000 * 60 * 60 * 24,
+    // );
   }
 });

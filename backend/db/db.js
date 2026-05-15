@@ -15,6 +15,12 @@ const sentimentResultSchema = new mongoose.Schema({
   sentiment: { type: String, enum: ['positive', 'negative', 'mixed', 'neutral'] },
   asset: { type: String, maxlength: 150 },
   reasoning: String,
+  url: String,
+  score: Number,
+  subreddit: String,
+  num_comments: Number,
+  upvote_ratio: Number,
+  confidence: Number,
   created_at: { type: Date, default: Date.now }
 }, { collection: 'sentiment_results' });
 

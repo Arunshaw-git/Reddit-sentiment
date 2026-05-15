@@ -9,7 +9,11 @@ const Homepage = () => {
   const [results, setResults] = useState([]);
   const [timeRange, setTimeRange] = useState("today");
   const [expandedIndex, setExpandedIndex] = useState(null);
+  const [selectedSubreddit, setSelectedSubreddit] = useState("all");
   const timeRanges = ["today", "week", "month", "year"];
+
+  // Extract unique subreddits for filtering
+  const subreddits = ["all", ...new Set(results.map(r => r.subreddit).filter(Boolean))];
 
   useEffect(() => {
     const loadData = async () => {
@@ -17,12 +21,17 @@ const Homepage = () => {
         const res = await fetch(`${API_URL}/homepage/${timeRange}`);
         const data = await res.json();
         setResults(data);
+        setSelectedSubreddit("all"); // Reset filter on time range change
       } catch (error) {
         console.error("Error while fetching", error);
       }
     };
     loadData();
   }, [timeRange]);
+
+  const filteredResults = selectedSubreddit === "all" 
+    ? results 
+    : results.filter(r => r.subreddit === selectedSubreddit);
 
   return (
     <div className="app-container">
@@ -55,9 +64,24 @@ const Homepage = () => {
           </select>
         </div>
 
+        {/* Subreddit Filter */}
+        {subreddits.length > 1 && (
+          <div className="filter-container">
+            {subreddits.map(sub => (
+              <button
+                key={sub}
+                className={`filter-chip ${selectedSubreddit === sub ? "active" : ""}`}
+                onClick={() => setSelectedSubreddit(sub)}
+              >
+                {sub === "all" ? "ALL SUBREDDITS" : `r/${sub}`}
+              </button>
+            ))}
+          </div>
+        )}
+
         <div className="results-list">
-          {results.length > 0 ? (
-            results.map((el, i) => (
+          {filteredResults.length > 0 ? (
+            filteredResults.map((el, i) => (
               <SentimentCard
                 key={i}
                 i={i}
@@ -68,7 +92,7 @@ const Homepage = () => {
             ))
           ) : (
             <p style={{ textAlign: "center", color: "var(--text-dim)", padding: "2rem" }}>
-              LOADING QUANT DATA...
+              {results.length === 0 ? "LOADING QUANT DATA..." : "NO RESULTS MATCHING FILTER"}
             </p>
           )}
         </div>

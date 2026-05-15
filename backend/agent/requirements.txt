@@ -1,0 +1,8 @@
+requests
+python-dotenv
+google-genai
+pymongo
+fastapi
+uvicorn
+python-multipart
+apscheduler

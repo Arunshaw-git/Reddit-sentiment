@@ -28,13 +28,14 @@ Investments can be:
 
 Rules:
 - Merge duplicate investments into one entry
--Reasoning should not contain metadata about posts but the reason mentioned in the posts and comments with some more relavant data from the internet but not any personal bad experience like they bought at the top and are in loss right now.  
+-Reasoning should be a detailed analysis. It should not contain metadata about posts but the reason mentioned in the posts and comments with some more relavant data from the internet but not any personal bad experience like they bought at the top and are in loss right now.  
+-Confidence should be a decimal between 0 and 1 representing how certain you are about the sentiment.
 
 Output ONLY a valid JSON array of objects.
 No markdown, no code blocks, no extra text.
 
 Each dict must have exactly these keys in order:
-"asset", "sentiment", "reasoning"
+"asset", "sentiment", "reasoning", "url", "score", "subreddit", "num_comments", "upvote_ratio", "confidence"
 
 Sentiment must be: positive, negative, or neutral.
 
@@ -135,6 +136,8 @@ def cleaningThePosts(wholePostsJson):
             "num_comments": post["num_comments"],
             "subreddit": post["subreddit"],
             "upvote_ratio":post["upvote_ratio"],
+            "url":post["permalink"],
+            "score":post["score"],
             "comments":getCleanComments(post["permalink"])
         })
         
@@ -186,34 +189,40 @@ def analyze_sentiment(client, content):
         print("CRITICAL: All Gemini models are currently experiencing high demand.")
     raise last_error if last_error else Exception("No active models available")
 
-for timeRange in timeRanges:
-    cleanedposts = []
-    completedTimeRange = "" 
-    for community in communities:
-        res = requests.get(f"https://www.reddit.com/r/{community}/top.json?t={timeRange}/", headers=HEADERS)
+def run_agent():
+    print("Starting sentiment analysis agent...")
+    for timeRange in timeRanges:
+        cleanedposts = []
+        for community in communities:
+            print(f"Fetching posts from r/{community} for {timeRange}...")
+            res = requests.get(f"https://www.reddit.com/r/{community}/top.json?t={timeRange}/", headers=HEADERS)
 
-        if res.status_code != 200:
-            print(f"couldnt get posts for the ${community} ",res)
-            continue
-        cleanedposts.extend(cleaningThePosts(res.json()))
-        time.sleep(2) # Avoid Reddit 429s
-              
-    print(f"\n\n Cleaned posts for {timeRange}:",cleanedposts)
-    
-    if cleanedposts :
-        promptwithdata = prompt + json.dumps(cleanedposts)
-        print("running the llm")
-        try:
-            response = analyze_sentiment(client, promptwithdata)
-            parsed = cleanResutIntoJson(response.text)
-            print("Gemini:\n", parsed)
-            if parsed:
-                print("\n ResultSavedOrNot:", save_sentiment_results(parsed, timeRange))
-            else:
-                print(f"No data saving for this {timeRange}")
-        except Exception as e:
-            print("Gemini call failed after all retries and fallbacks", repr(e))
-    else:
-        print(f"No cleaned posts for this {timeRange}")
-    
-    time.sleep(4)
+            if res.status_code != 200:
+                print(f"couldnt get posts for the {community} ", res)
+                continue
+            cleanedposts.extend(cleaningThePosts(res.json()))
+            time.sleep(2) # Avoid Reddit 429s
+                
+        print(f"\n\n Cleaned posts for {timeRange}:", len(cleanedposts))
+        
+        if cleanedposts :
+            promptwithdata = prompt + json.dumps(cleanedposts)
+            print(f"Running LLM analysis for {timeRange}...")
+            try:
+                response = analyze_sentiment(client, promptwithdata)
+                parsed = cleanResutIntoJson(response.text)
+                if parsed:
+                    status = save_sentiment_results(parsed, timeRange)
+                    print(f"\n ResultSaved for {timeRange}:", status)
+                else:
+                    print(f"No data parsed for this {timeRange}")
+            except Exception as e:
+                print(f"Gemini call failed for {timeRange} after all retries", repr(e))
+        else:
+            print(f"No cleaned posts for this {timeRange}")
+        
+        time.sleep(4)
+    print("Agent run completed.")
+
+if __name__ == "__main__":
+    run_agent()
