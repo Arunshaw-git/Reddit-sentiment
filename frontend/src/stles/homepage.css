@@ -166,7 +166,7 @@ body {
   z-index: -1;
 }
 
-.data-section > * {
+.data-section>* {
   position: relative;
   z-index: 1;
 }
@@ -211,24 +211,21 @@ body {
 }
 
 /* Dynamic card colors based on hero image palette */
-.sentiment-card:nth-child(3n+1) {
-}
+.sentiment-card:nth-child(3n+1) {}
 
 .sentiment-card:nth-child(3n+1):hover {
   background: rgba(147, 197, 253, 0.15);
   border-color: #93c5fd;
 }
 
-.sentiment-card:nth-child(3n+2) {
-}
+.sentiment-card:nth-child(3n+2) {}
 
 .sentiment-card:nth-child(3n+2):hover {
   background: rgba(251, 113, 133, 0.15);
   border-color: #fb7185;
 }
 
-.sentiment-card:nth-child(3n+3) {
-}
+.sentiment-card:nth-child(3n+3) {}
 
 .sentiment-card:nth-child(3n+3):hover {
   background: rgba(52, 211, 153, 0.15);
@@ -256,8 +253,12 @@ body {
 
 .sentiment-card:nth-child(3n+1):hover .reason-text-inline,
 .sentiment-card:nth-child(3n+1):hover .full-reasoning,
-.sentiment-card:nth-child(3n+1):hover .reasoning-text {
-  color: #e2e8f0;
+.sentiment-card:nth-child(3n+1):hover .reasoning-text,
+.sentiment-card:nth-child(3n+1):hover .card-meta,
+.sentiment-card:nth-child(3n+1):hover .confidence-header,
+.sentiment-card:nth-child(3n+1):hover .subreddit-badge,
+.sentiment-card:nth-child(3n+1):hover .btn-view-post {
+  color: #f8fafc;
 }
 
 .sentiment-card:nth-child(3n+2):hover {
@@ -274,8 +275,12 @@ body {
 
 .sentiment-card:nth-child(3n+2):hover .reason-text-inline,
 .sentiment-card:nth-child(3n+2):hover .full-reasoning,
-.sentiment-card:nth-child(3n+2):hover .reasoning-text {
-  color: #e2e8f0;
+.sentiment-card:nth-child(3n+2):hover .reasoning-text,
+.sentiment-card:nth-child(3n+2):hover .card-meta,
+.sentiment-card:nth-child(3n+2):hover .confidence-header,
+.sentiment-card:nth-child(3n+2):hover .subreddit-badge,
+.sentiment-card:nth-child(3n+2):hover .btn-view-post {
+  color: #f8fafc;
 }
 
 .sentiment-card:nth-child(3n+3):hover {
@@ -292,8 +297,12 @@ body {
 
 .sentiment-card:nth-child(3n+3):hover .reason-text-inline,
 .sentiment-card:nth-child(3n+3):hover .full-reasoning,
-.sentiment-card:nth-child(3n+3):hover .reasoning-text {
-  color: #e2e8f0;
+.sentiment-card:nth-child(3n+3):hover .reasoning-text,
+.sentiment-card:nth-child(3n+3):hover .card-meta,
+.sentiment-card:nth-child(3n+3):hover .confidence-header,
+.sentiment-card:nth-child(3n+3):hover .subreddit-badge,
+.sentiment-card:nth-child(3n+3):hover .btn-view-post {
+  color: #f8fafc;
 }
 
 .card-ticker .symbol {
@@ -331,9 +340,17 @@ body {
   gap: 0.5rem;
 }
 
-.sentiment-value.positive { color: var(--success-blue); }
-.sentiment-value.negative { color: var(--danger-blue); }
-.sentiment-value.neutral { color: var(--text-main); }
+.sentiment-value.positive {
+  color: var(--success-blue);
+}
+
+.sentiment-value.negative {
+  color: var(--danger-blue);
+}
+
+.sentiment-value.neutral {
+  color: var(--text-main);
+}
 
 .card-reasoning-summary {
   text-align: left;
@@ -391,7 +408,11 @@ body {
 
 .sentiment-card.expanded .reason-text-inline,
 .sentiment-card.expanded .full-reasoning,
-.sentiment-card.expanded .reasoning-text {
+.sentiment-card.expanded .reasoning-text,
+.sentiment-card.expanded .card-meta,
+.sentiment-card.expanded .confidence-header,
+.sentiment-card.expanded .subreddit-badge,
+.sentiment-card.expanded .btn-view-post {
   color: #cbd5e1;
 }
 
@@ -435,6 +456,7 @@ body {
     opacity: 0;
     transform: translateY(20px);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);
@@ -467,7 +489,9 @@ body {
   gap: 1.5rem;
   margin-top: 1rem;
   font-size: 0.75rem;
-  color: var(--text-dim);
+  color: #1e293b;
+  transition: color 0.3s;
+  font-weight: 600;
 }
 
 .meta-item {
@@ -477,11 +501,13 @@ body {
 }
 
 .subreddit-badge {
-  background: rgba(147, 197, 253, 0.1);
+  background: rgba(15, 23, 42, 0.05);
   padding: 0.2rem 0.6rem;
   border-radius: 12px;
-  border: 1px solid var(--border-blue);
-  color: var(--primary-blue);
+  border: 1px solid rgba(15, 23, 42, 0.2);
+  color: #1e293b;
+  font-weight: 600;
+  transition: all 0.3s;
 }
 
 .confidence-container {
@@ -495,6 +521,9 @@ body {
   font-size: 0.7rem;
   text-transform: uppercase;
   letter-spacing: 1px;
+  color: #1e293b;
+  transition: color 0.3s;
+  font-weight: 600;
 }
 
 .confidence-bar-bg {
@@ -516,15 +545,16 @@ body {
   gap: 0.5rem;
   margin-top: 1.5rem;
   padding: 0.6rem 1.2rem;
-  background: transparent;
-  border: 1px solid var(--border-blue);
-  color: var(--text-main);
+  background: rgba(15, 23, 42, 0.05);
+  border: 1px solid rgba(15, 23, 42, 0.3);
+  color: #1e293b;
   font-family: 'Orbitron', sans-serif;
   font-size: 0.7rem;
   text-decoration: none;
   text-transform: uppercase;
   transition: all 0.3s;
   cursor: pointer;
+  font-weight: 700;
 }
 
 .btn-view-post:hover {
@@ -543,9 +573,9 @@ body {
 
 .filter-chip {
   padding: 0.5rem 1.2rem;
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid var(--border-blue);
-  color: var(--text-dim);
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(15, 23, 42, 0.15);
+  color: #1e293b;
   font-family: 'Orbitron', sans-serif;
   font-size: 0.7rem;
   cursor: pointer;
@@ -568,12 +598,13 @@ body {
     grid-template-columns: 1fr;
     gap: 1.5rem;
   }
+
   .card-sentiment {
     border-left: none;
     padding-left: 0;
   }
+
   .hero-content h1 {
     font-size: 4rem;
   }
 }
-
