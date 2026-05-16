@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "./stles/homepage.css";
 import SentimentCard from "./SentimentCard";
-import heroBg from "/herobg.jpeg";
+import heroBg from "/liquid-bg.png";
 
 const API_URL = import.meta.env.VITE_API_URL || "http://localhost:5000";
 

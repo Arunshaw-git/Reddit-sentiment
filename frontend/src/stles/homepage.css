@@ -19,7 +19,8 @@
 
 body {
   margin: 0;
-  background-color: var(--deep-blue);
+  background-color: #000;
+  background-image: url("https://www.transparenttextures.com/patterns/stardust.png"); 
   color: var(--text-main);
   font-family: 'Inter', sans-serif;
   overflow-x: hidden;
@@ -66,15 +67,7 @@ body {
   opacity: 1;
 }
 
-.hero-overlay {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(180deg, rgba(2, 6, 23, 0.4) 0%, rgba(2, 6, 23, 0.1) 50%, rgba(2, 6, 23, 0.4) 100%);
-  z-index: 0;
-}
+
 
 .hero-content {
   position: relative;
@@ -84,11 +77,13 @@ body {
 
 .hero-content h1 {
   font-family: 'Orbitron', sans-serif;
-  font-size: clamp(3rem, 10vw, 8rem);
+  font-size: clamp(4rem, 15vw, 11rem);
   font-weight: 900;
-  line-height: 0.9;
+  line-height: 0.8;
   margin-bottom: 2rem;
   text-transform: uppercase;
+  letter-spacing: -0.04em;
+  color: #ffffff;
 }
 
 .hero-content h1 .outline {
@@ -98,12 +93,13 @@ body {
 
 .hero-tagline {
   font-family: 'Orbitron', sans-serif;
-  font-size: clamp(0.7rem, 2vw, 1.2rem);
-  letter-spacing: 0.3em;
+  font-size: clamp(0.6rem, 1.5vw, 0.9rem);
+  letter-spacing: 0.5em;
   color: var(--text-main);
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
   margin-bottom: 3rem;
-  font-weight: 400;
+  font-weight: 700;
+  opacity: 0.8;
 }
 
 .hero-actions {
@@ -148,7 +144,8 @@ body {
 .data-section {
   padding: 4rem 5%;
   position: relative;
-  border-top: 1px solid rgba(147, 197, 253, 0.1);
+  background: #000;
+  border-top: 1px solid var(--border-blue);
 }
 
 .data-section::before {
@@ -158,11 +155,7 @@ body {
   left: 0;
   right: 0;
   bottom: 0;
-  background: url('/herobg.jpeg');
-  background-size: cover;
-  background-position: center;
-  background-attachment: fixed;
-  filter: blur(3px);
+  background: transparent;
   z-index: -1;
 }
 
@@ -184,7 +177,7 @@ body {
   font-family: 'Orbitron', sans-serif;
   font-size: 0.8rem;
   letter-spacing: 4px;
-  color: black;
+  color: var(--text-dim);
 }
 
 .results-list {
@@ -310,12 +303,12 @@ body {
   font-size: 2.5rem;
   font-weight: 900;
   display: block;
-  color: black;
+  color: var(--text-main);
 }
 
 .card-ticker .name {
   font-size: 0.6rem;
-  color: #1e293b;
+  color: var(--text-dim);
   text-transform: uppercase;
   letter-spacing: 1px;
 }
@@ -326,7 +319,7 @@ body {
 
 .sentiment-label {
   font-size: 0.6rem;
-  color: #1e293b;
+  color: var(--text-dim);
   text-transform: uppercase;
   margin-bottom: 0.5rem;
   display: block;
@@ -359,7 +352,7 @@ body {
 
 .reason-label {
   font-size: 0.6rem;
-  color: #1e293b;
+  color: var(--text-dim);
   text-transform: uppercase;
   margin-bottom: 0.5rem;
   display: block;
@@ -368,7 +361,7 @@ body {
 .reason-text-inline {
   font-size: 0.95rem;
   font-weight: 500;
-  color: #0f172a;
+  color: var(--text-main);
   line-height: 1.4;
   display: -webkit-box;
   -webkit-line-clamp: 2;
@@ -489,7 +482,7 @@ body {
   gap: 1.5rem;
   margin-top: 1rem;
   font-size: 0.75rem;
-  color: #1e293b;
+  color: var(--text-dim);
   transition: color 0.3s;
   font-weight: 600;
 }
@@ -501,11 +494,11 @@ body {
 }
 
 .subreddit-badge {
-  background: rgba(15, 23, 42, 0.05);
+  background: rgba(147, 197, 253, 0.1);
   padding: 0.2rem 0.6rem;
   border-radius: 12px;
-  border: 1px solid rgba(15, 23, 42, 0.2);
-  color: #1e293b;
+  border: 1px solid var(--border-blue);
+  color: var(--primary-blue);
   font-weight: 600;
   transition: all 0.3s;
 }
@@ -521,7 +514,7 @@ body {
   font-size: 0.7rem;
   text-transform: uppercase;
   letter-spacing: 1px;
-  color: #1e293b;
+  color: var(--text-main);
   transition: color 0.3s;
   font-weight: 600;
 }
@@ -545,9 +538,9 @@ body {
   gap: 0.5rem;
   margin-top: 1.5rem;
   padding: 0.6rem 1.2rem;
-  background: rgba(15, 23, 42, 0.05);
-  border: 1px solid rgba(15, 23, 42, 0.3);
-  color: #1e293b;
+  background: transparent;
+  border: 1px solid var(--border-blue);
+  color: var(--text-main);
   font-family: 'Orbitron', sans-serif;
   font-size: 0.7rem;
   text-decoration: none;
@@ -573,9 +566,9 @@ body {
 
 .filter-chip {
   padding: 0.5rem 1.2rem;
-  background: rgba(255, 255, 255, 0.1);
-  border: 1px solid rgba(15, 23, 42, 0.15);
-  color: #1e293b;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--border-blue);
+  color: var(--text-dim);
   font-family: 'Orbitron', sans-serif;
   font-size: 0.7rem;
   cursor: pointer;
