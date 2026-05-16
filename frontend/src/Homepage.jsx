@@ -29,8 +29,8 @@ const Homepage = () => {
     loadData();
   }, [timeRange]);
 
-  const filteredResults = selectedSubreddit === "all" 
-    ? results 
+  const filteredResults = selectedSubreddit === "all"
+    ? results
     : results.filter(r => r.subreddit === selectedSubreddit);
 
   return (
@@ -92,7 +92,7 @@ const Homepage = () => {
             ))
           ) : (
             <p style={{ textAlign: "center", color: "var(--text-dim)", padding: "2rem" }}>
-              {results.length === 0 ? "LOADING QUANT DATA..." : "NO RESULTS MATCHING FILTER"}
+              {results.length === 0 ? "LOADING DATA..." : "NO RESULTS MATCHING FILTER"}
             </p>
           )}
         </div>
@@ -100,7 +100,7 @@ const Homepage = () => {
 
       {/* Footer */}
       <footer className="app-footer">
-        <div className="footer-brand">SENTIMENT ANALYTICA</div>
+        <div className="footer-brand">Reddit based sentiment</div>
         <div className="footer-copy">Made by Arun Shaw 2026</div>
       </footer>
     </div>

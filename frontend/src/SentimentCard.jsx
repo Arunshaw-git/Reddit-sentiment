@@ -66,12 +66,6 @@ const SentimentCard = ({ el, i, expanded, onToggle }) => {
         </a>
       </div>
 
-      {expanded && (
-        <div className="card-details-full">
-           <div className="divider"></div>
-           <p className="full-reasoning">{el.reasoning}</p>
-        </div>
-      )}
     </div>
   );
 };
