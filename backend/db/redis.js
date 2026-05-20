@@ -3,10 +3,11 @@ import dotenv from "dotenv";
 dotenv.config();
 
 const redisClient = new client(
-    process.env.REDIS_URL,{maxRetriesPerRequest: 1,
-    lazyConnect: true,
-    family: 0,}
-);
+    process.env.REDIS_URL,{
+    maxRetriesPerRequest: null,
+    enableReadyCheck: false,
+    connectTimeout: 10000,
+});
 
 redisClient.on(
     "connect",
