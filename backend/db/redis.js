@@ -7,6 +7,8 @@ const redisClient = new client(
     maxRetriesPerRequest: null,
     enableReadyCheck: false,
     connectTimeout: 10000,
+    lazyConnect: true,
+    family: 4,
 });
 
 redisClient.on(
