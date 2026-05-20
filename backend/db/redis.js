@@ -3,7 +3,7 @@ import dotenv from "dotenv";
 dotenv.config();
 
 const redisClient = new client({
-    REDIS_URL: process.env.REDIS_URL
+    process.env.REDIS_URL
 });
 
 redisClient.on(
