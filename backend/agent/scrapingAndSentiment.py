@@ -27,7 +27,7 @@ Investments can be:
 - Sectors or industries if no stock is specified
 
 Rules:
-- Merge duplicate investments into one entry
+- Merge duplicate investments into one entry and the link will be of the post which has the highest score and number of comments.
 -Reasoning should be a detailed analysis. It should not contain metadata about posts but the reason mentioned in the posts and comments with some more relavant data from the internet but not any personal bad experience like they bought at the top and are in loss right now.  
 -Confidence should be a decimal between 0 and 1 representing how certain you are about the sentiment.
 

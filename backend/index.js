@@ -11,6 +11,7 @@ const __dirname = dirname(__filename);
 const app = express();
 import routes from "./routes/health.js";
 // import { client, connectRedis } from "./db/redis.js";
+import redisClient from "./db/redis.js";
 
 // connectRedis();
 app.use(routes);
@@ -59,6 +60,9 @@ app.get("/db-check", async (req, res) => {
 
 app.get("/homepage/:t", async (req, res) => {
   const { t } = req.params;
+
+  //THIS IS WHEN I USED LOCAL STORAGE FOR RESULTS
+
   // const dirPath = path.join(__dirname, "agent", "results", t);
   // const file = fs.readdirSync(dirPath);
 
@@ -75,14 +79,23 @@ app.get("/homepage/:t", async (req, res) => {
   //   console.log("Cache found; returing data from redis");
   //   return res.json(JSON.parse(cached));
   // }
+
   try {
+    const cached = await redisClient.get(`homepage:${t}`);
+    if(cached){
+      console.log("Cache found for homepage:", t);
+      return res.json(JSON.parse(cached));
+    }
     const rows = await SentimentResult.find(
       { time_range: t },
       { asset: 1, sentiment: 1, reasoning: 1, url: 1, score: 1, subreddit: 1, num_comments: 1, upvote_ratio: 1, confidence: 1, _id: 0 }
     );
-    // Redis 
-    // await client.setEx(cacheKey, 3600, JSON.stringify(rows));
+
+    redisClient.setex(`homepage:${t}`, 3600, JSON.stringify(rows));
+    console.log("Cache set for homepage:", t);
+
     res.json(rows);
+
   } catch (error) {
     console.error("Error while fetching sentiment results:", error);
     res.status(500).json({
