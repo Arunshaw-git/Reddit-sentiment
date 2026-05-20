@@ -2,9 +2,9 @@ import client from "ioredis";
 import dotenv from "dotenv";
 dotenv.config();
 
-const redisClient = new client({
+const redisClient = new client(
     process.env.REDIS_URL
-});
+);
 
 redisClient.on(
     "connect",
