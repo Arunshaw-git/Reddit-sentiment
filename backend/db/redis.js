@@ -3,7 +3,9 @@ import dotenv from "dotenv";
 dotenv.config();
 
 const redisClient = new client(
-    process.env.REDIS_URL
+    process.env.REDIS_URL,{maxRetriesPerRequest: 1,
+    lazyConnect: true,
+    family: 0,}
 );
 
 redisClient.on(
