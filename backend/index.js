@@ -12,8 +12,8 @@ const app = express();
 import routes from "./routes/health.js";
 // import { client, connectRedis } from "./db/redis.js";
 import redisClient from "./db/redis.js";
+import cron from "node-cron";
 
-// connectRedis();
 app.use(routes);
 // const pythonPath = path.join(
 //   process.cwd(),
@@ -125,23 +125,29 @@ function runAgent() {
   });
 }
 
-let agentStarted = false;
 
 // let fileName = null;
 // const dirPath = path.join(__dirname, "agent", "results", "today");
 // if (fs.existsSync(dirPath)) {
-//   const file = fs.readdirSync(dirPath);
-//   if (file.length > 0) {
-//     fileName = file[0];
-//   }
-// }
-
+  //   const file = fs.readdirSync(dirPath);
+  //   if (file.length > 0) {
+    //     fileName = file[0];
+    //   }
+    // }
+    
+let agentStarted = false;
 app.listen(5000, () => {
   console.log("Started server");
   const date = new Date().toISOString().slice(0, 10);
   console.log(date);
-  if (!agentStarted) {
-    agentStarted = true;
+
+  // Every day at midnight
+  cron.schedule('0 0 * * *', () => {
+    console.log("Cron triggered: running agent...");
+    runAgent();
+  });
+  // if (!agentStarted) {
+  //   agentStarted = true;
     // if (!fileName || !fileName.startsWith(`today_${date}`)) runAgent();
     // The agent is now an external service with its own scheduler.
     // setInterval(
@@ -150,5 +156,5 @@ app.listen(5000, () => {
     //   },
     //   1000 * 60 * 60 * 24,
     // );
-  }
+  // }
 });
