@@ -1,20 +1,18 @@
-# Use Node.js 20 image
-FROM node:20-slim
+FROM node:22
 
-# Set working directory
+RUN apt-get update && \
+    apt-get install -y python3 python3-pip
+
 WORKDIR /app
 
-# Copy package files
 COPY package*.json ./
-
-# Install dependencies
 RUN npm install
 
-# Copy source code
+COPY agent/requirements.txt .
+RUN pip3 install -r requirements.txt
+
 COPY . .
 
-# Expose port
-EXPOSE 5000
+EXPOSE 3000
 
-# Start the application
-CMD ["npm", "start"]
+CMD ["node", "index.js"]

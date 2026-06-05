@@ -17,7 +17,7 @@ import re
 from tenacity import retry, stop_after_attempt, wait_exponential, retry_if_exception_type
 
 HEADERS = {
-    "User-Agent": "reddit-stock-sentiment/0.1 by Arun"
+    "User-Agent": "reddit-stock-sentiment/0.1 by u/vegetaevagilion"
 }
 prompt = """
 Extract investment sentiment from the input.
