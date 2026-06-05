@@ -206,7 +206,7 @@ body {
 
 
 
-.sentiment-card.light .card-ticker,
+.sentiment-card.light .card-ticker .symbol,
 .sentiment-card.light .card-ticker .name,
 .sentiment-card.light .sentiment-label,
 .sentiment-card.light .reason-label,
@@ -216,10 +216,6 @@ body {
 .sentiment-card.light .subreddit-badge,
 .sentiment-card.light .btn-view-post {
   color: var(--deep-blue);
-}
-
-.centiment-card.light .symbol {
-  color: var(--text-main)
 }
 
 .sentiment-card.light .subreddit-badge {
