@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=Orbitron:wght@400;700;900&display=swap');
 
 :root {
-  --primary-blue:#93c5fd;
+  --primary-blue: #93c5fd;
   --deep-blue: #020617;
   --panel-blue: rgba(15, 23, 42, 0.8);
   --border-blue: rgba(147, 197, 253, 0.2);
@@ -20,7 +20,7 @@
 body {
   margin: 0;
   background-color: #000;
-  background-image: url("https://www.transparenttextures.com/patterns/stardust.png"); 
+  background-image: url("https://www.transparenttextures.com/patterns/stardust.png");
   color: var(--text-main);
   font-family: 'Inter', sans-serif;
   overflow-x: hidden;
@@ -113,11 +113,13 @@ body {
   position: relative;
   border-top: 1px solid var(--border-blue);
 }
-.data-section.dark{
-  background:#000;
+
+.data-section.dark {
+  background: #000;
 }
-.data-section.light{
-  background:#ffffff;
+
+.data-section.light {
+  background: #ffffff;
 }
 
 .data-section::before {
@@ -183,9 +185,17 @@ body {
 
 /* Per-variant border accents on hover (appear after general hover rules).
    These are intentionally minimal to avoid duplicating large style blocks. */
-.sentiment-card:nth-child(3n+1):hover { border-color: #93c5fd; }
-.sentiment-card:nth-child(3n+2):hover { border-color: #fb7185; }
-.sentiment-card:nth-child(3n+3):hover { border-color: #34d399; }
+.sentiment-card:nth-child(3n+1):hover {
+  border-color: #93c5fd;
+}
+
+.sentiment-card:nth-child(3n+2):hover {
+  border-color: #fb7185;
+}
+
+.sentiment-card:nth-child(3n+3):hover {
+  border-color: #34d399;
+}
 
 /* Light-theme card text: dark text and lighter background for cards with `light` class */
 .sentiment-card.light {
@@ -193,9 +203,10 @@ body {
   color: var(--deep-blue);
   border: 1px solid rgba(2, 6, 23, 0.06);
 }
-.sentiment-card.light:hover { background: rgba(255, 255, 255, 0.9); }
 
-.sentiment-card.light .card-ticker .symbol,
+
+
+.sentiment-card.light .card-ticker,
 .sentiment-card.light .card-ticker .name,
 .sentiment-card.light .sentiment-label,
 .sentiment-card.light .reason-label,
@@ -207,15 +218,27 @@ body {
   color: var(--deep-blue);
 }
 
+.centiment-card.light .symbol {
+  color: var(--text-main)
+}
+
 .sentiment-card.light .subreddit-badge {
   background: rgba(2, 6, 23, 0.03);
   border-color: rgba(2, 6, 23, 0.06);
   color: var(--deep-blue);
 }
 
-.sentiment-card.light .sentiment-value.positive { color: var(--success-blue); }
-.sentiment-card.light .sentiment-value.negative { color: var(--danger-blue); }
-.sentiment-card.light .sentiment-value.neutral { color: var(--deep-blue); }
+.sentiment-card.light .sentiment-value.positive {
+  color: var(--success-blue);
+}
+
+.sentiment-card.light .sentiment-value.negative {
+  color: var(--danger-blue);
+}
+
+.sentiment-card.light .sentiment-value.neutral {
+  color: var(--deep-blue);
+}
 
 .card-ticker .symbol {
   font-family: 'Orbitron', sans-serif;
@@ -324,7 +347,7 @@ body {
   justify-content: space-between;
   align-items: center;
   font-size: 0.6rem;
-  color: var(--text-dim);
+  color: var(--primary-blue);
   font-family: 'Orbitron', sans-serif;
 }
 
@@ -496,7 +519,8 @@ body {
     font-size: 4rem;
   }
 }
-/* From Uiverse.io by Yaya12085 */ 
+
+/* From Uiverse.io by Yaya12085 */
 .label {
   height: 30px;
   width: 60px;
@@ -517,7 +541,7 @@ body {
   transform: perspective(100px) rotateX(5deg) rotateY(-5deg);
 }
 
-#checkbox:checked ~ .label:hover {
+#checkbox:checked~.label:hover {
   transform: perspective(100px) rotateX(-2deg) rotateY(2deg);
 }
 
@@ -529,20 +553,25 @@ body {
 .label::before {
   position: absolute;
   content: "";
-  height: 22px;        /* was 40px */
-  width: 22px;         /* was 40px */
+  height: 22px;
+  /* was 40px */
+  width: 22px;
+  /* was 40px */
   border-radius: 50%;
   background-color: #000000;
   background-image: linear-gradient(130deg, #757272 10%, #ffffff 11%, #726f6f 62%);
-  left: 4px;           /* was 10px */
+  left: 4px;
+  /* was 10px */
   box-shadow: 0 2px 1px rgba(0, 0, 0, 0.3),
-    5px 5px 5px rgba(0, 0, 0, 0.3);  /* was 10px 10px 10px */
+    5px 5px 5px rgba(0, 0, 0, 0.3);
+  /* was 10px 10px 10px */
   transition: 0.4s;
 }
 
 /* Circle in ON state */
-#checkbox:checked ~ .label::before {
-  left: 34px;          /* was 70px — (width - circle width - offset) = 60 - 22 - 4 */
+#checkbox:checked~.label::before {
+  left: 34px;
+  /* was 70px — (width - circle width - offset) = 60 - 22 - 4 */
   background-color: #000000;
   background-image: linear-gradient(315deg, #000000 0%, #414141 70%);
   transition: 0.4s;
