@@ -4,12 +4,15 @@ import ReactDOM from "react-dom/client";
 import Homepage from "./Homepage.jsx"; // Import the main App component
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min.js';
+import ThemeProvider from "./components/ThemeProvider.jsx";
 
 const root = ReactDOM.createRoot(document.getElementById("app"));
 root.render(
   <React.StrictMode>
     <div className="main">
-      <Homepage />
+      <ThemeProvider>
+        <Homepage />
+      </ThemeProvider>
     </div>
   </React.StrictMode>,
 );

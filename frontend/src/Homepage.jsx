@@ -1,11 +1,22 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import "./stles/homepage.css";
 import SentimentCard from "./SentimentCard";
 import heroBg from "/liquid-bg.png";
+import {ThemeContext} from "./components/ThemeProvider";
 
-const API_URL = import.meta.env.VITE_API_URL || "http://localhost:5000";
+const API_URL = "https://reddit-sentiment-0l0e.onrender.com";
+// const API_URL = "http://localhost:5000";
 
 const Homepage = () => {
+  const { theme, bgImage, darkThemeToggle, lightThemeToggle } = useContext(ThemeContext);
+
+  const onThemeToggle = () => {
+    if (theme === "dark") {
+      lightThemeToggle();
+    } else {
+      darkThemeToggle();
+    }
+  };
   const [results, setResults] = useState([]);
   const [timeRange, setTimeRange] = useState("today");
   const [expandedIndex, setExpandedIndex] = useState(null);
@@ -39,9 +50,13 @@ const Homepage = () => {
       <section className="hero">
         <img
           className="hero-bg"
-          src={heroBg}
+          src={bgImage}
           alt="Hero background"
         />
+        <div className="container">
+          <input type="checkbox" name="checkbox" id="checkbox" onChange={onThemeToggle} />
+          <label htmlFor="checkbox" className="label"> </label>
+        </div>
 
         <div className="hero-content animate-in">
           <h1>ESCAPE <br /> THE <br /> <span className="outline">NOISE</span></h1>
@@ -50,7 +65,7 @@ const Homepage = () => {
       </section>
 
       {/* Main Data Section */}
-      <main className="data-section">
+      <main className={`data-section ${theme}`}>
         <div className="section-header">
           <div className="section-title">LIVE MARKET SENTIMENT / {timeRange.toUpperCase()}</div>
           <select

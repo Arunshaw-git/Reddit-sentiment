@@ -1,6 +1,9 @@
-import React from "react";
+import  React,{useContext} from "react";
+import {ThemeContext} from "./components/ThemeProvider";
 
 const SentimentCard = ({ el, i, expanded, onToggle }) => {
+    const {theme} = useContext(ThemeContext)
+
   const getSentimentIcon = (sentiment) => {
     switch (sentiment?.toLowerCase()) {
       case 'positive': return "↗";
@@ -8,10 +11,10 @@ const SentimentCard = ({ el, i, expanded, onToggle }) => {
       default: return "−";
     }
   };
-
+  
   return (
     <div
-      className={`sentiment-card ${expanded ? "expanded" : ""}`}
+      className={`sentiment-card ${expanded ? "expanded" : ""} ${theme}`}
       onClick={onToggle}
     >
       <div className="card-ticker">
