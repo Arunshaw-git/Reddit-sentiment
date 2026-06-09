@@ -195,7 +195,7 @@ def run_agent():
         cleanedposts = []
         for community in communities:
             print(f"Fetching posts from r/{community} for {timeRange}...")
-            res = requests.get(f"https://www.reddit.com/r/{community}/top.json?t={timeRange}/", headers=HEADERS)
+            res = requests.get(f"https://www.old.reddit.com/r/{community}/top.json?t={timeRange}/", headers=HEADERS)
 
             if res.status_code != 200:
                 print(f"couldnt get posts for the {community} ", res)
